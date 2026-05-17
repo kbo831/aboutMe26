@@ -46,7 +46,7 @@ export default {
                                 <figure class="figure">
                                     <div class="img-box"  id="real-photo">
                                         <div class="img-inner">
-                                            <img src="../../assets/image/about/5.png" alt="김태은 캐릭터">
+                                            <img src="./assets/image/about/5.png" alt="김태은 캐릭터">
                                         </div>
                                     </div>
                                 </figure>
