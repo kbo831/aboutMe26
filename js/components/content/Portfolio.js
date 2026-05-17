@@ -9,7 +9,7 @@ export default {
         if (!document.querySelector('link[href*="portfolio.css"]')){ 
             const link = document.createElement('link'); //태그 생성
             link.rel = 'stylesheet';
-            link.href = '../../assets/css/content/portfolio.css';
+            link.href = './assets/css/content/portfolio.css';
             document.head.appendChild(link); //head 태그에 추가
         }
     });
