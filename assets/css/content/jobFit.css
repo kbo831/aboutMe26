@@ -1,0 +1,35 @@
+
+/* 애니메이션 적용 전 스타일 */
+
+.center-title{font-size: 5rem; opacity: 1; visibility: visible;  transition: all 0.3s ease-in-out;}
+
+/* 기본 상태: 카드가 살짝 안쪽으로 접혀있고 투명함 */
+.side-card ,.center-card-con{
+  opacity:0;
+  transition: all 0.8s ease-in-out; /* 부드러운 움직임 속도 */
+}
+
+
+.left-card { transform: translateY(50px); }
+.center-card{}
+.right-card { transform: translateY(-50px); }
+
+/* [JS로 추가할 클래스] 스크롤 도달 시 펼쳐지는 상태 */
+.animation-wrapper.is-visible .left-card,
+.animation-wrapper:hover .left-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animation-wrapper.is-visible .right-card,
+.animation-wrapper:hover .right-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animation-wrapper.is-visible .center-card-con, .animation-wrapper:hover .center-card-con{ opacity: 1;}
+
+.animation-wrapper.is-visible .center-title,
+.animation-wrapper:hover .center-title
+{opacity: 0; visibility: hidden; position: absolute; top:0;left: 0; bottom: 0; right: 0;}
+
