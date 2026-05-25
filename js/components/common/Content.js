@@ -17,11 +17,11 @@ export default {
         return {};
     },
     template:`
-    <section class="content">
+    <div class="content">
         <about-section></about-section>
-        <timeLine-section></timeLine-section>
         <jobFit-section></jobFit-section>
+        <timeLine-section></timeLine-section>
         <portfolio-section></portfolio-section>
-    </section>
+    </div>
     `
 };

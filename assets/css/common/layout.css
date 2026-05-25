@@ -58,35 +58,6 @@ main{width: 100%;}
 #skip-menu .skip-link{position:absolute; top:-100px; left: 0; padding: 20px; background-color: #fff;white-space: nowrap;}
 #skip-menu .skip-link:focus{ position:absolute;  top:0}
 
-/* row-list */
-.row-list {display:flex; align-items: center; justify-content: center; gap: 3rem;}
-.row-list li{position: relative; width: calc(100% / 3);aspect-ratio: 1 / 1;/* 너비에 맞춰 높이를 무조건 1:1로 고정 */}
-.row-list h3{font-weight: bold; margin-bottom: 2rem;}
-
-/* column-list */
-.column-list{}
-.column-list li,.column-list li h3 ,.column-list li p{display: inline-flex;}
-.column-list li{
-    width: 100%;
-    height: 10rem;
-    margin-bottom: 4rem;
-    display: inline-flex;
-    align-items: center;
-    border: 1px solid var(--main-bg-color2);
-    }
-.column-list li h3 ,.column-list li p{height: 100%;align-items: center;}
-.column-list h3{font-weight: bold; background-color: var(--main-bg-color2); 
-    justify-content: center;align-items: center;
-    flex: 0 0 30%;/* 늘어나지마(0), 줄어들지도마(0), 기본 크기는 30% */
-    color:#fff;
-}
-.column-list p{flex:1;padding: 2rem;}
-/* sub content common */
-.sub-content{padding: 15rem 0;}
-.sc-con{padding: var(--layout-padding);}
-.sc-title{font-size: 6rem;font-family: "Pretendard"; font-weight: bold;letter-spacing: 0.2rem; margin: 15rem 0 10rem 0;}
-
-
 
 
 

@@ -77,13 +77,12 @@ export default {
   },
   //html 마크업
   template: `
-<div class="sc sub-content">
+<section class="sc sub-content">
 <!--가로스크롤 컨텐츠 시작-->
        <!--Trigger: 스크롤 감지 영역 (전체 가로 스크롤을 제어하는 영역) -->
         <div id="about" class="about-trigger-section">
           <!-- Pin Container: 화면에 꽉 차게 고정될 뷰포트 구역 -->
             <div class="about-pin-container">
-                
                 <!--  Horizontal Target: 가로로 길게 연결된 실제 내용 -->
                 <div class="about-horizontal-wrap">
                     
@@ -284,13 +283,13 @@ export default {
                             </ul>
                         </div>
                     </article>
-                <!-- article 끝 -->
+                    <!-- article컨텐츠 끝 -->
                 </div>
             </div>
 
         </div>
     <!-- 가로스크롤 컨텐츠 끝 -->
     
-</div>
+</section>
     `,
 };

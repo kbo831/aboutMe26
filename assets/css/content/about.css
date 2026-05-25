@@ -112,6 +112,7 @@
 .about-slide.bg05{}
 .about-slide.bg05 .slide-inner{text-align: left;}
 .about-slide.bg05  .column-list{width: 50%;margin-left: 10%;height: 100%;padding-top: 20rem;}
+.about-slide.bg05  .column-list li{}
 
 
 .about-slide.bg05 h2{align-self: flex-start; margin: 10rem 0;}

@@ -122,6 +122,51 @@ padding: 5rem 4rem; width: 100%; height: 100%; z-index:2}
 .skip-card .bg.bg02{background-image: url("../../img/main/portfolio_big.png");}
 .skip-card .bg.bg03{background-image: url("../../img/main/contact_big.png"); }
 
+
+/* row-list */
+.row-list {display:flex; align-items: center; justify-content: center; gap: 3rem;}
+.row-list li{position: relative; width: calc(100% / 3);aspect-ratio: 1 / 1;/* 너비에 맞춰 높이를 무조건 1:1로 고정 */}
+.row-list h3{font-weight: bold; margin-bottom: 2rem;}
+
+/* column-list */
+.column-list{}
+.column-list li,.column-list li h3 ,.column-list li p{display: inline-flex;}
+.column-list li{
+    width: 100%;
+    min-height: 10rem;
+    margin-bottom: 4rem;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--main-bg-color2);
+    }
+.column-list li h3 ,.column-list li p{height: 100%;align-items: center;}
+.column-list h3{font-weight: bold; background-color: var(--main-bg-color2); 
+    justify-content: center;align-items: center;
+    flex: 0 0 30%;/* 늘어나지마(0), 줄어들지도마(0), 기본 크기는 30% */
+    color:#fff;
+}
+.column-list p{flex:1;padding: 2rem;}
+/* sub content common */
+.sub-content{padding: 15rem 0;}
+.sc-con{padding: var(--layout-padding);}
+.sc-title{font-size: 6rem;font-family: "Pretendard"; font-weight: bold;letter-spacing: 0.2rem; margin: 15rem 0 10rem 0;}
+
+/* card  */
+.card-wrapper h3{color: #fff; font-weight: bold;}
+.card-wrapper{display: flex; flex-direction: column;}
+.row-card { text-align: center;}
+.row-card h3{
+    font-size: 3rem;
+    padding: 3rem 0;
+    background: var(--main-bg-color2);}
+.row-card {position: relative}
+
+/* left-list */
+.left-list{text-align: left;
+    padding: 3rem 2rem;}
+.left-list li{font-size: 1.5rem;  color: var(--font-color02); margin: 1.2rem 0;}
+.left-list li > .title{font-weight: bold ;font-size: 1.8rem; min-width: 15rem; display: inline-block; }
+
 @media screen and (max-width: 1500px) {
 
     .skip-card .link{max-width: 35rem;}
