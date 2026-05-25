@@ -1,4 +1,4 @@
-import {ref,onMounted,onUnmounted} from 'vue';
+import {ref,onMounted,onUnmounted,nextTick} from 'vue';
 
 export default {
     name : 'PortfolioSection', // 컴포넌트 이름
@@ -48,7 +48,8 @@ export default {
                     scrub: 1, //스크롤 휠의 움직임과 애니메이션 속도를 부드럽게 동기화,1초 딜레이
                     start: "top top", // trigger 영역 맨 위가 화면 맨 위에 닿을 때 시작
                     end: "+=300%", //스크롤을 아래로 300%만큼 내리는 동안 고정 유지
-
+                    pinSpacing: true,  // 고정풀릴때 튕김 방지
+                    invalidateOnRefresh: true, // 실시간 재연산
                     // 실시간 스크롤 위치(진행도)에 따라 왼쪽 책갈피 메뉴 활성화
                     onUpdate:(self)=>{
                         // self.progress는 전체 스크롤 진행도 (0.0 ~ 1.0)
@@ -67,7 +68,7 @@ export default {
                 }
             }); // gsap end
 
-      
+            ScrollTrigger.refresh(); //타임라인 정의가 모두 끝난 직후, GSAP에게 모든 요소의 위치를 재계산
             //타임라인에 카드 올라오는 순서대로 동작 정의
            cards.forEach((card, idx) => {
                 if (idx === 0) return; // 1번 카드는 이미 기본 배치되어 있으므로 패스
@@ -107,19 +108,43 @@ export default {
         }//initPortfolioScroll end
 
         onMounted(()=>{
+
+            const csshref= './assets/css/content/portfolio.css';
+            let cssLink = document.querySelector(`link[href*="portfolio.css"]`);
+            
+            //  DOM과 스타일(CSS)이 모두 준비되었을 때 안전하게 실행할 비동기 함수
+            const startPortfolioLogic = async () => {
+                // Vue가 template 마크업을 실제 DOM에 완전히 반영할 때까지 대기
+                await nextTick(); 
+                
+                initTitleObserver();  // 제목 페이드인 오Observer 실행
+                initPortfolioScroll(); // GSAP 스크롤 애니메이션 실행
+                
+                // 브라우저가 최종 스타일을 확정 짓도록 50ms 미세 딜레이 후 GSAP 위치 재연산
+                setTimeout(() => {
+                    if (typeof ScrollTrigger !== 'undefined') {
+                        ScrollTrigger.refresh();
+                    }
+                }, 50);
+            };
+
+
             // html 문서 전체에서 괄호 내 태그 찾기 => CSS를 불러오는 <link> 태그 중에서, href(경로)에 about.css 포함된 태그 
-            if (!document.querySelector('link[href*="portfolio.css"]')){ 
-                const link = document.createElement('link'); //태그 생성
-                link.rel = 'stylesheet';
-                link.href = './assets/css/content/portfolio.css';
-                document.head.appendChild(link); //head 태그에 추가
+            if (!cssLink){ 
+                cssLink = document.createElement('link'); //태그 생성
+                cssLink.rel = 'stylesheet';
+                cssLink.href = csshref;
+                document.head.appendChild(cssLink); //head 태그에 추가
+                
+                //CSS 로딩이 '완료'되는 순간을 확인하면 실행
+                cssLink.onload = () => {
+                    startPortfolioLogic();
+                };
+            }else {
+                // 이미 CSS가 head에 존재한다면 즉시 실행
+                startPortfolioLogic();
             }
             
-            setTimeout(() => {
-                initTitleObserver();  // 돔요소와 css 링크 전부 렌더링 후 제목 페이드인 애니메이션 실행
-                initPortfolioScroll();//gsap 스크롤 애니메이션 
-            }, 100);
-           
         });
 
         onUnmounted(() => {

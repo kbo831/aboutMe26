@@ -1,5 +1,5 @@
 
-import {ref,onMounted} from 'vue';
+import {ref,onMounted,nextTick} from 'vue';
 
 export default {
   name: "TimeLineSection", // 컴포넌트 이름
@@ -65,7 +65,7 @@ export default {
  template: 
 `
 
-  <section class="sc sub-content">
+  <section id="timeline-section" class="sc sub-content" >
     <div id="timeline" class="sc-inner">
         <ul class="activity">
             <li class="li activity-list">

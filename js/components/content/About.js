@@ -33,9 +33,11 @@ export default {
                 const horizontalWrap = document.querySelector('.about-horizontal-wrap');
                 const slides = document.querySelectorAll('.about-slide'); //자식슬라이드 전체 지칭
                 const totalSlides= slides.length; //자식슬라이드 개수
+                const navItems = document.querySelectorAll('.about-bookmark li');
+
 
             //함수형으로 선언해야 실시간(새로고침, 리사이징)으로 수치연산가능
-                gsap.to(horizontalWrap, {
+            const portfolioTimeline =  gsap.to(horizontalWrap, {
                     x: () => { // 함수형으로 변경하여 실시간 변경
                         const totalWidth = horizontalWrap.scrollWidth;
                         const windowWidth = window.innerWidth;
@@ -59,10 +61,40 @@ export default {
                             ease: 'power1.inOut' // 부드러운 가속도 효과
                         }
                         //snap end
+
                     }
                     //scrollTrigger end
                 });
                 //gsap.to end
+
+
+                 //책갈피 클릭 기능
+                    navItems.forEach((nav, idx) => {
+                        nav.addEventListener('click', (e) => {
+                            e.preventDefault(); // <a> 태그의 기본 이동 기능 막기
+                            navItems.forEach(item => item.classList.remove('active'));
+
+                            nav.classList.add("active");
+                            // 전체 스크롤트리거의 시작(start)점과 끝(end)점 위치 구하기
+                            const start = portfolioTimeline.scrollTrigger.start;
+                            const end = portfolioTimeline.scrollTrigger.end;
+                            const totalScrollDistance = end - start; // 고정되어 스크롤되는 총 길이
+
+                            // 카드가 전환되는 지점의 비율(progress)을 계산
+                            // 예: 카드 3개일 때 -> 0번 카드=0%, 1번 카드=50%, 2번 카드=100% 진행 지점
+                            const targetProgress = idx / (totalSlides - 1);
+
+                            // 계산된 비율을 바탕으로 브라우저가 이동해야 할 실제 스크롤 Y축 위치를 구하기
+                            const targetScrollY = start + (totalScrollDistance * targetProgress);
+
+                            // 4. window.scrollTo를 사용해 해당 위치로 스크롤 
+                            window.scrollTo({
+                                top: targetScrollY,
+                                behavior: 'smooth' // 부드러운 스크롤 효과
+                            });
+                        });
+                    }); // 책갈피 클릭 스크롤 기능 end
+
             });
             //mm.add end
         });//nextTick end
@@ -82,6 +114,27 @@ export default {
     <!--가로스크롤 컨텐츠 시작-->
        <!--Trigger: 스크롤 감지 영역 (전체 가로 스크롤을 제어하는 영역) -->
         <div id="about" class="about-trigger-section">
+            <!-- 책갈피(Bookmark Nav): 화면 한쪽에 고정될 네비게이션 -->
+            <nav class="about-bookmark">
+                <ul>
+                    <li class="active" data-slide="0">
+                    <a href="#void">
+                        <span class="sr-only"> about me</span></a>
+                    </li>
+                    <li data-slide="1">
+                    <a href="#void">
+                        <span class="sr-only">나를 설명하는 키워드</span></a>
+                    </li>
+                    <li data-slide="2">
+                    <a href="#void">
+                        <span class="sr-only">나의 강점</span></a>
+                    </li>
+                     <li data-slide="3">
+                     <a href="#void">
+                        <span class="sr-only">나의 가치관</span></a>
+                     </li>
+                </ul>
+            </nav>
           <!-- Pin Container: 화면에 꽉 차게 고정될 뷰포트 구역 -->
             <div class="about-pin-container">
                 <!--  Horizontal Target: 가로로 길게 연결된 실제 내용 -->
