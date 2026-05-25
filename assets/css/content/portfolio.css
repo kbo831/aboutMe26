@@ -3,7 +3,7 @@
 ,.full-list .li{ opacity: 0;visibility: hidden;} */
 
 #portfolio{}
-#portfolio .full-list{width: 80%;margin: 0 auto;}
+#portfolio .full-list{/* width: 80%; */margin: 0 auto;}
 #portfolio .full-list .link{justify-content: space-between;gap: 2rem;}
 #portfolio .full-list .lst-con.right{max-width: 46rem;align-self: flex-start;}
 #portfolio .desc{margin-top: 4rem;}

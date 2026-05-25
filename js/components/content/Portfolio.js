@@ -18,6 +18,8 @@ export default {
     //html 마크업
     template: `
 <section class="sc sub-content">
+    <div class="sc-inner">
+    <h2>Portfolio</h2>
     <!-- Trigger 구역: 스크롤을 감지하고 전체를 고정(Pin)할 구역 -->
     <div id="portfolio" class="portfolio-trigger-section">
 
@@ -216,6 +218,7 @@ export default {
             <!-- 포트폴리오 ul -->
         </div>
         <!--스크롤 wrap-->
+    </div>
     </div>
 </section>
     `
