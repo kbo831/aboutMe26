@@ -4,6 +4,9 @@ import ContentSection from './components/common/Content.js';
 import FooterSection from './components/common/Footer.js';
 // 여기에 Header, Projects 등도 똑같이 import
 
+
+
+
 const App = {
     components: {
         'header-section': HeaderSection,

@@ -1,9 +1,13 @@
-import {ref,onMounted} from 'vue';
+import {ref,onMounted,onUnmounted,nextTick} from 'vue';
 
 export default {
   name: "AboutSection", // 컴포넌트 이름
   setup() {
+
     // js 코드
+    let mm;
+
+    // 마운트 될 때 css 태그 생성
     onMounted(()=>{
         // html 문서 전체에서 괄호 내 태그 찾기 => CSS를 불러오는 <link> 태그 중에서, href(경로)에 about.css 포함된 태그 
         if (!document.querySelector('link[href*="about.css"]')){ 
@@ -12,6 +16,61 @@ export default {
             link.href = './assets/css/content/about.css';
             document.head.appendChild(link); //head 태그에 추가
         }
+
+        //gsap 가로스크롤 코드
+        //브라우저 창에 로드된 gsap에 ScrollTrigger 플러그인 등록
+        gsap.registerPlugin(ScrollTrigger); //window. 생략 가능
+
+        //view가 화면을 완벽히 그릴 때까지 기다림
+        nextTick(() => {
+            //gsap.matchMedia 생성 
+            mm = gsap.matchMedia();
+
+            //가로스크롤 애니메이션 실행 ( 768px이하로는 가로스크롤 사라짐)
+            mm.add("(min-width: 769px)", () => {
+                    
+                //전체 슬라이드 컨텐츠 감싸 상자
+                const horizontalWrap = document.querySelector('.about-horizontal-wrap');
+                const slides = document.querySelectorAll('.about-slide'); //자식슬라이드 전체 지칭
+                const totalSlides= slides.length; //자식슬라이드 개수
+
+            //함수형으로 선언해야 실시간(새로고침, 리사이징)으로 수치연산가능
+                gsap.to(horizontalWrap, {
+                    x: () => { // 함수형으로 변경하여 실시간 변경
+                        const totalWidth = horizontalWrap.scrollWidth;
+                        const windowWidth = window.innerWidth;
+                        return -(totalWidth - windowWidth);
+                    },
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '#about', // about-trigger-section(최상위 부모)
+                        pin: true, //about-pin-container 뷰포트(최상위 부모 하위 자식) 
+                        scrub: 1,
+                        start: 'top top',
+                        end: () => `+=${horizontalWrap.scrollWidth}`,
+                        invalidateOnRefresh: true, // 새로고침,화면 리사이즈 수식 재 연산
+                        
+                        //snap 옵션 추가
+                        snap:{
+                            // 0부터 1 사이의 구간을 슬라이드 개수에 맞게 균등하게 나눔, -1은 슬라이드가 5개이면 4번이동이기때문에 -1!
+                            snapTo: 1 /(totalSlides - 1), 
+                            duration:{ min: 0, max: 0.5 }, // snap 애니메이션 시간
+                            delay: 0.1, // snap 재사용 대기시간
+                            ease: 'power1.inOut' // 부드러운 가속도 효과
+                        }
+                        //snap end
+                    }
+                    //scrollTrigger end
+                });
+                //gsap.to end
+            });
+            //mm.add end
+        });//nextTick end
+    });
+    //onMount end
+
+    onUnmounted(() => {
+        if (mm) mm.revert();
     });
 
     return {};
@@ -78,7 +137,7 @@ export default {
                                     <ul class="desc">
                                         <li>
                                             <strong class="desc-title">우석대학교</strong>
-                                            신문방송학과, 중어중문학과 졸업
+                                            신문방송학과, 중국어학과 졸업
                                         </li>
                                         <li>
                                             <strong class="desc-title">산동사범대학교</strong>
@@ -145,19 +204,24 @@ export default {
                             <ul class="row-list keyword">
                                 <li>
                                     <span className="object img01"></span>
-                                    <h3>계획</h3>
-                                    <p>지식 쌓는 부분으로 자기계발을 좋아해서 목표를 정해서 계획 세우는 것을 좋아함</p>
+                                    <h3>'왜'라는 질문을 하는 사람</h3>
+                                    <p>
+                                        단순히 기능을 구현하는 것보다 왜 그렇게 동작하는지, 어떤 흐름으로 연결되는지를 이해하는 과정을 중요하게 생각
+                                    </p>
                                 </li>
                                 <li>
                                     <span className="object img02"></span>
-                                    <h3>기록</h3>
-                                     <p>관심분야에  대한  강의 듣고  유익한 내용에 대해서 기록하는 것 좋아함</p>
+                                    <h3>깊게 몰입하는 사람</h3>
+                                    <p>
+                                        하나의 문제를 오래 붙잡고 원인을 분석하며 스스로 납득할 때까지 고민하는 성향
+                                    </p>
                                 </li>
                                 <li>
                                     <span className="object img03"></span>
-                                    <h3>자아성찰</h3>
-                                    <p>성취감에 살아가는 의미를 느껴서 성공여부 관계없이 계획에 따라 실행해 나아감</p>
-                                
+                                    <h3>끊임없이 성장하려는 사람</h3>
+                                    <p>
+                                       하루를 돌아보며 부족했던 점과 개선할 부분을 스스로 점검하는 시간을 중요하게 생각
+                                    </p>
                                 </li>
                             </ul>
                         </div>
@@ -167,22 +231,29 @@ export default {
                         <div class="slide-inner sc-con">
                             <h2>
                              <span className="object img01"></span>
-                            나의 강점
+                                나의 강점
                               <span className="object img02"></span>
                             </h2>
             
                             <ul class="row-list strength">
                                 <li>
-                                    <h3>인내</h3>
-                                    <p>목표나 맡은 일에 대해 어려운 일이 있어도인내하며 해결해 나아감</p>
+                                    <h3>문제를 구조적으로 분석하는 태도</h3>
+                                    <p>
+                                    문제를 단순 현상으로 보지 않고,
+                                    원인 → 흐름 → 결과를 연결하여 구조적으로 분석하려고 노력
+                                    </p>
                                 </li>
                                 <li>
-                                    <h3>배려</h3>
-                                     <p>기본적인 예의의 덕목이라 생각하기때문에 상대방을 먼저 살피려고 함</p>
+                                    <h3>책임감 있게 끝까지 해결하는 태도</h3>
+                                     <p>맡은 일은 끝까지 책임감 있게 수행하며 
+                                        신뢰를 줄 수 있는 태도를 중요하게 생각
+                                    </p>
                                 </li>
                                 <li>
-                                    <h3>공감</h3>
-                                    <p>상대방이 처한 환경이나 입장에 대해서 이해를 잘함</p>
+                                    <h3>사용자 관점에서 고민하는 태도</h3>
+                                    <p>
+                                        기능 구현 자체보다 사용자가 어떤 흐름에서 불편함을 느끼는지 고민하는 것을 중요하게 생각
+                                    </p>
                                 </li>
                             </ul>
                         </div>
@@ -194,135 +265,32 @@ export default {
                             <span class="object img01"></span>
                              <ul class="column-list">
                                 <li>
-                                    <h3>책임</h3>
-                                    <p>맡은 바에 최선을 다하고 남에게 피해주지말자</p>
+                                    <h3>존중</h3>
+                                    <p>서로를 존중하는 태도가 좋은 협업과 건강한 관계의 시작이라고 생각합니다.</p>
+                                </li>
+                                 <li>
+                                    <h3>소통</h3>
+                                    <p>상대방의 의견을 경청하며 명확하고 배려 있는 소통을 중요하게 생각합니다.</p>
                                 </li>
                                 <li>
-                                    <h3>청렴</h3>
-                                     <p>거짓되게 살면 언젠가 돌아가니 진실되게 살자</p>
+                                    <h3>성장</h3>
+                                     <p>현재에 안주하지 않고 꾸준한 배움과 경험을 통해 성장하고자 노력합니다.</p>
                                 </li>
                                 <li>
-                                    <h3>예의</h3>
-                                    <p>연령 상관없이 항상 예의있게 살자</p>
+                                    <h3>성찰</h3>
+                                    <p>하루를 돌아보며 부족했던 부분을 개선하고 더 나은 방향으로 성장하고자 노력합니다.</p>
                                 </li>
+                               
                             </ul>
                         </div>
                     </article>
-
-                    <article class="about-slide bg06">
-                        <div class="slide-inner sc-con">
-                            <h2>타임라인</h2>
-                            <ul class="activity">
-                                <li class="li activity-list">
-                                    <div class="link">
-                                        <h3 class="con-title solid-title">경험/활동</h3>
-                                            <ul class="desc">
-                                                <li>
-                                                    <span class="place tultip">대전정보문화산업진흥원</span>
-                                                    <strong class="desc-title">정보보안 전문교육, 소프트웨어 개발보안 및 취약점관리
-                                                        <span class="date">(25.12 ~ 25.12)</span>
-                                                    </strong>
-                                                </li>
-                                                <li>
-                                                    <span class="place tultip">익산시청</span>
-                                                    <strong class="desc-title">초등 교육지비원 접수안내 및 등록 사무보조 단기아르바이트
-                                                        <span class="date">(25.03 ~ 25.04)</span>
-                                                    </strong>
-                                                </li>
-                                                <li>
-                                                    <span class="place tultip">대덕인재개발원</span>
-                                                    <strong class="desc-title">AI 기술을 활용한 소프트웨어 엔지니어링 과정
-                                                        <span class="date">(23.08 ~ 24.04)</span>
-                                                    </strong>
-                                                </li>
-                                                <li>
-                                                    <span class="place tultip">그린아카데미</span>
-                                                    <strong class="desc-title">플럽드러닝 디지털디자인(웹퍼블리셔)양성과정
-                                                        <span class="date">(20.12 ~ 21.04)</span>
-                                                    </strong>
-                                                </li>
-                                                <li>
-                                                    <span class="place tultip">대전시사중국어학원</span>
-                                                    <strong class="desc-title">
-                                                        중국어 전임강사
-                                                        <span class="date">(19.04 ~ 20.05)</span>
-                                                    </strong>
-                                                </li>
-                                                <li>
-                                                    <span class="place tultip">익산·대전</span>
-                                                    <strong class="desc-title">
-                                                        중국어 과외·아르바이트
-                                                        <span class="date">(18.02 ~ 19.02)</span>
-                                                    </strong>
-                                                </li>
-                                                <li>
-                                                    <span class="place tultip">중국산동사범대학교</span>
-                                                    <span class="tultip volunteer">자원봉사</span>
-                                                    <strong class="desc-title">한국인 중국문화체험(제남의 예술과 역사) 중한통역 2박3일
-                                                        <span class="date">(16.12)</span>
-                                                    </strong>
-                                                </li>
-                                                <li>
-                                                    <span class="place tultip">중국산동사범대학교</span>
-                                                    <span class="tultip volunteer">자원봉사</span>
-                                                    <strong class="desc-title">
-                                                        부안교육청 초등학생 여름방학 중국어교육캠프 중한통역 2박3일
-                                                        <span class="date">(16.9)</span>
-                                                    </strong>
-                                                </li>
-                                                <li>
-                                                    <span class="place tultip">여성가족부</span>
-                                                    <span class="tultip volunteer">자원봉사</span>
-                                                    <strong class="desc-title">
-                                                        한중교류문화체험(중국인가정방문체험) 중한통역 1박2일
-                                                        <span class="date">(16.5)</span>
-                                                    </strong>
-                                                    
-                                                </li>
-                                                <li>
-                                                    <span class="place tultip">광서과학기술대학교</span>
-                                                    <strong class="desc-title">
-                                                        광서과학기술대학교 우석대학교 중국어교환학생
-                                                        <span class="date">(12.08 ~ 13.08)</span>
-                                                    </strong>
-                                                </li>
-                                                <li>
-                                                    <span class="place tultip">여성가족부지원 미디어강사</span>
-                                                    <span class="tultip social">사회활동</span>
-                                                    <strong class="desc-title">
-                                                        삼례초등학교 미디어강사
-                                                        <span class="date">(11.06 ~ 12.05)</span>
-                                                    </strong>
-                                                </li>
-                                                <li>
-                                                    <span class="place tultip">제20기 전북방송아카데미 교육과정</span>
-                                                    <span class="tultip social">대외활동</span>
-                                                    <strong class="desc-title">
-                                                        직업체험 및 방송교육이수
-                                                        <span class="date">(10.11 ~ 11.01)</span>
-                                                    </strong>
-                                                </li>
-                                                <li>
-                                                    <span class="place tultip">우석대학교</span>
-                                                    <span class="tultip">교내활동</span>
-                                                    <strong class="desc-title">
-                                                        교내 방송사 아나운서·방송엔지니어
-                                                        <span class="date">(10.03 ~ 11.06)</span>
-                                                    </strong>
-                                                    
-                                                </li>
-                                            </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </article>
-
+                <!-- article 끝 -->
                 </div>
             </div>
 
         </div>
     <!-- 가로스크롤 컨텐츠 끝 -->
+    
 </div>
     `,
 };

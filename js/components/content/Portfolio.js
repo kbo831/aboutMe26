@@ -33,32 +33,104 @@ export default {
     <div class="portfolio-scroll-wrap">
             <!-- 포트폴리오 ul -->
             <ul class="ul full-list">
+                <!--Start: faceLogin -->
+                <li class="li">
+                    <div  class="link">
+                        <div class="lst-con left">
+                            <h3 class="link-title"><i class="num">01.</i>
+                            얼굴로그인
+                            <a class="btn git icon" href="https://github.com/TaengAndJong/faceLogin.git" title="프로젝트 원격저장소 바로가기"  target="_blank">
+                                    <span class="sr-only">프로젝트 원격저장소 바로가기 버튼</span>
+                              </a>
+                            </h3>
+                            
+                            <div class="desc">
+                                <p>회원가입 시, 아이디와 사용자 얼굴 </p>
+                                <strong class="desc-title">클라이언트</strong>                                
+                               
+                                <strong class="desc-title">구축언어</strong>
+                                <ul class="skill">
+                                    <li>
+                                        <i class="skill-icon java"></i>
+                                        <p class="sr-only">java</p>
+                                    </li>
+                                    <li>
+                                        <i class="skill-icon react"></i>
+                                        <p class="sr-only">react</p>
+                                    </li>
+                                    <li>
+                                        <i class="skill-icon vite"></i>
+                                        <p class="sr-only">vite</p>
+                                    </li>
+                                    <li>
+                                        <i class="skill-icon spring_boot"></i>
+                                        <p class="sr-only">spring boot</p>
+                                    </li>
+                                    <li>
+                                        <i class="skill-icon spring_security"></i>
+                                        <p class="sr-only">spring security</p>
+                                    </li>
+                                    <li>
+                                        <i class="skill-icon sass"></i>
+                                        <p class="sr-only">sasse</p>
+                                    </li>
+                                    <li>
+                                        <i class="skill-icon figma"></i>
+                                        <p class="sr-only">figma</p>
+                                    </li>
+                                    <li>
+                                        <i class="skill-icon photoshop"></i>
+                                        <p class="sr-only">photoshop</p>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                        <figure class="lst-con right">
+                            <div class="img-box">
+                                <div class="img-inner">
+                                    <img src="../../assets/image/portfolio/theBook/theBook.jpg" alt="도서판매포트폴리오 이미지">
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
+                </li>
+                <!--End: faceLogin -->
+                <!-- Start -->
+                <li class="li">
+                    <div  class="link">
+                        <div class="lst-con left">
+                                <h3 class="link-title"><i class="num">02.</i>사이드 프로젝트 준비중</h3>
+                                <div class="desc">
+                                    <p>일반회원과 관리자로 권한을 분리한 도서 판매 웹 서비스</p>
+                                    <strong class="desc-title">클라이언트</strong>                                
+                                    <p>회원가입, 마이페이지(찜·개인정보·배송지 관리), 장바구니, 결제, 도서 조회 및 검색 기능을 이용 가능</p>
+                                    <strong class="desc-title">관리자</strong>
+                                    <p>방문자 통계, 페이지 클릭뷰, 도서 등록/수정/삭제, 게시판 문의 관리 기능을 통해 전체 사이트를 운영 가능</p>
+                                </div>
+                        </div>
+                        <figure class="lst-con right">
+                            <div class="img-box">
+                                <div class="img-inner">
+                                    <img src="../../assets/image/portfolio/theBook/theBook.jpg" alt="도서판매포트폴리오 이미지">
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
+                </li>
+                <!-- End -->
                 <!-- thebook -->
                 <li class="li">
                     <div  class="link">
                         <div class="lst-con left">
                             <h3 class="link-title">
-                              <i class="num">01.</i>도서판매<small>(PC형)</small>
-                               <a class="btn git icon" href="https://github.com/TaengAndJong/team01" title="프로젝트 원격저장소 바로가기"  target="_blank">
-                                    <span class="sr-only">프로젝트 원격저장소 바로가기 버튼</span>
-                              </a>
+                                <i class="num">03.</i>도서판매<small>(PC형)</small>
+                                <a class="btn git icon" href="https://github.com/TaengAndJong/team01.git" title="프로젝트 원격저장소 바로가기"  target="_blank">
+                                        <span class="sr-only">프로젝트 원격저장소 바로가기 버튼</span>
+                                </a>
                             </h3>
                             <div class="desc">
-                                <p>일반회원과 관리자로 권한을 분리한 도서 판매 웹 서비스</p>
-                                <strong class="desc-title">클라이언트</strong>                                
-                                <p>회원가입, 마이페이지(찜·개인정보·배송지 관리), 장바구니, 결제, 도서 조회 및 검색 기능을 이용 가능
-                                    <a href="https://www.tjbook.store" class="btn go-btn" title="클라이언트 바로가기 새창열림" target="_blank">
-                                        <span>go</span>
-                                        <i class="icon arrow_black"></i>
-                                    </a>
-                                </p>
-                                <strong class="desc-title">관리자</strong>
-                                <p>방문자 통계, 페이지 클릭뷰, 도서 등록/수정/삭제, 게시판 문의 관리 기능을 통해 전체 사이트를 운영 가능
-                                    <a href="https://www.tjbook.store/admin" class="btn go-btn" title="관리자 바로가기 새창열림" target="_blank">
-                                        <span>go</span>
-                                        <i class="icon arrow_black"></i>
-                                    </a>
-                                </p>
+                                <p>일반회원과 관리자로 권한을 분리한 도서 판매 웹 서비스( 예외처리, 책임분리 수정 중 )</p>
                                 <strong class="desc-title">사용기술</strong>
                                 <ul class="skill">
                                     <!-- Programming Languages -->
@@ -138,88 +210,8 @@ export default {
                         </figure>
                     </div>
                 </li>
-                <!-- thebook -->
-                <!-- Start -->
-                <li class="li">
-                    <div  class="link">
-                        <div class="lst-con left">
-                            <h3 class="link-title"><i class="num">02.</i>얼굴로그인</h3>
-                            <div class="desc">
-                                <p>회원가입 시, 얼굴이미지를 촬영하여</p>
-                                <strong class="desc-title">클라이언트</strong>                                
-                                <p>회원가입, 마이페이지(찜·개인정보·배송지 관리), 장바구니, 결제, 도서 조회 및 검색 기능을 이용 가능</p>
-                                <strong class="desc-title">관리자</strong>
-                                <p>방문자 통계, 페이지 클릭뷰, 도서 등록/수정/삭제, 게시판 문의 관리 기능을 통해 전체 사이트를 운영 가능</p>
-                                <strong class="desc-title">구축언어</strong>
-                                <ul class="skill">
-                                    <li>
-                                        <i class="skill-icon java"></i>
-                                        <p class="sr-only">java</p>
-                                    </li>
-                                    <li>
-                                        <i class="skill-icon react"></i>
-                                        <p class="sr-only">react</p>
-                                    </li>
-                                    <li>
-                                        <i class="skill-icon vite"></i>
-                                        <p class="sr-only">vite</p>
-                                    </li>
-                                    <li>
-                                        <i class="skill-icon spring_boot"></i>
-                                        <p class="sr-only">spring boot</p>
-                                    </li>
-                                    <li>
-                                        <i class="skill-icon spring_security"></i>
-                                        <p class="sr-only">spring security</p>
-                                    </li>
-                                    <li>
-                                        <i class="skill-icon sass"></i>
-                                        <p class="sr-only">sasse</p>
-                                    </li>
-                                    <li>
-                                        <i class="skill-icon figma"></i>
-                                        <p class="sr-only">figma</p>
-                                    </li>
-                                    <li>
-                                        <i class="skill-icon photoshop"></i>
-                                        <p class="sr-only">photoshop</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <figure class="lst-con right">
-                            <div class="img-box">
-                                <div class="img-inner">
-                                    <img src="../../assets/image/portfolio/theBook/theBook.jpg" alt="도서판매포트폴리오 이미지">
-                                </div>
-                            </div>
-                        </figure>
-                    </div>
-                </li>
                 <!-- End -->
-                <!-- Start -->
-                <li class="li">
-                    <div  class="link">
-                        <div class="lst-con left">
-                                <h3 class="link-title"><i class="num">03.</i>사이드 프로젝트 준비중</h3>
-                                <div class="desc">
-                                    <p>일반회원과 관리자로 권한을 분리한 도서 판매 웹 서비스</p>
-                                    <strong class="desc-title">클라이언트</strong>                                
-                                    <p>회원가입, 마이페이지(찜·개인정보·배송지 관리), 장바구니, 결제, 도서 조회 및 검색 기능을 이용 가능</p>
-                                    <strong class="desc-title">관리자</strong>
-                                    <p>방문자 통계, 페이지 클릭뷰, 도서 등록/수정/삭제, 게시판 문의 관리 기능을 통해 전체 사이트를 운영 가능</p>
-                                </div>
-                        </div>
-                        <figure class="lst-con right">
-                            <div class="img-box">
-                                <div class="img-inner">
-                                    <img src="../../assets/image/portfolio/theBook/theBook.jpg" alt="도서판매포트폴리오 이미지">
-                                </div>
-                            </div>
-                        </figure>
-                    </div>
-                </li>
-                <!-- End -->
+                
             </ul>
             <!-- 포트폴리오 ul -->
         </div>

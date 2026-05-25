@@ -44,17 +44,35 @@
 
 
 /* 가로 슬라이드 */
+/* 스크롤을 감지하고 화면을 고정(Pin)할 최상위 영역 */
+.about-trigger-section{
+    width: 100% ; 
+    max-width: none ; 
+    overflow: hidden;} 
+/* GSAP가 잡고 흔들 가로 고정 컨테이너  */
+.about-pin-container {
+    width: 100%;
+    height: 100vh;    /* 화면 높이에 꽉 맞춤 */
+    position: relative;
+    overflow: hidden; /* 내부에서 튀어나가는 박스 제어 */
+}
+/* display: flex로 내부 article들을 가로로 나열 */
 .about-horizontal-wrap{
-    /* display:flex */
+   display: flex ;
+    flex-wrap: nowrap ;
+    width: max-content ; /* 자식 요소들의 원래 크기(100vw * 5)대로 늘어남, 자식수만큼 넓이 늘어나게 설정*/
+    height: 100%;
 }
-.about-slide{width: 100%; 
-    /* min-width: 100%; */
+.about-slide{
+    width: 100vw ;    /* 정확히 브라우저 화면 하나의 꽉 찬 가로폭 */
+    height: 100vh ;   /* 정확히 화면 하나의 세로폭 */
+    min-height: 90rem;
+    flex-shrink: 0 ;  /* 부모가 좁아져도 컨텐츠 찌그러짐 방지 */
     color:var(--font-color02);
-     min-height: 90rem;
-
 }
 
-.slide-inner{display: flex;flex-direction: column;align-items: center;justify-content: center;padding:var(--layout-padding)}
+.slide-inner{display: flex;flex-direction: column;align-items: center;justify-content: center;padding:var(--layout-padding);width: 100%;
+    height: 100%;}
 
 .about-slide h2{font-size: 5rem;font-weight: bold;margin: 10rem 0;}
 .about-slide h3{font-size: 3rem; }
@@ -76,7 +94,7 @@
 
 /* 키워드 */
 .about-slide.bg03{}
-.about-slide.bg03 h2{display: inline-flex; align-items: center; justify-content: center;text-align: center; }
+.about-slide.bg03 h2{display: inline-flex;align-items: center;justify-content: center;text-align: center;margin: 0;}
 .about-slide.bg03 h2 .object{position: static; margin: 0 2rem;}
 .about-slide.bg03 h2 .object.img01{background-image: url(../../image/about/bg0401.png);}
 .about-slide.bg03 h2 .object.img02{background-image: url(../../image/about/bg0402.png);}
@@ -120,6 +138,16 @@ width: 1px; background-color: var(--main-bg-color2); position: absolute; left:5r
 
 
 @media screen and (max-width:768px) {
+
+    .about-pin-container{height: auto;}
+    .about-horizontal-wrap{
+    flex-wrap: wrap;
+    width: auto;
+    height: auto;
+}
+    .about-slide{
+    height: auto;
+}
     .slide-inner .lst-con.right{padding: 4rem 0;}
     .about-slide .slide-inner,.about-slide.bg02 .slide-inner{flex-direction: column;}
     .about-slide.bg02  .slide-inner .img-box img {aspect-ratio: 3/3;}
