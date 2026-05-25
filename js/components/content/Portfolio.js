@@ -79,6 +79,31 @@ export default {
                 });
             });
 
+            //책갈피 클릭 기능
+            navItems.forEach((nav, idx) => {
+                nav.addEventListener('click', (e) => {
+                    e.preventDefault(); // <a> 태그의 기본 이동 기능 막기
+
+                    // 전체 스크롤트리거의 시작(start)점과 끝(end)점 위치 구하기
+                    const start = portfolioTimeline.scrollTrigger.start;
+                    const end = portfolioTimeline.scrollTrigger.end;
+                    const totalScrollDistance = end - start; // 고정되어 스크롤되는 총 길이
+
+                    // 카드가 전환되는 지점의 비율(progress)을 계산
+                    // 예: 카드 3개일 때 -> 0번 카드=0%, 1번 카드=50%, 2번 카드=100% 진행 지점
+                    const targetProgress = idx / (cards.length - 1);
+
+                    // 계산된 비율을 바탕으로 브라우저가 이동해야 할 실제 스크롤 Y축 위치를 구하기
+                    const targetScrollY = start + (totalScrollDistance * targetProgress);
+
+                    // 4. window.scrollTo를 사용해 해당 위치로 스크롤 
+                    window.scrollTo({
+                        top: targetScrollY,
+                        behavior: 'smooth' // 부드러운 스크롤 효과
+                    });
+                });
+            }); // 책갈피 클릭 스크롤 기능 end
+
         }//initPortfolioScroll end
 
         onMounted(()=>{
