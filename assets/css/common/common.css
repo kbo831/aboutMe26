@@ -47,7 +47,7 @@ overflow: hidden;
  padding: 5rem 0;
 border-top: 2px solid var(--main-bg-color2);
 }
-.full-list .link-title{color:var(--font-color02);font-size: 4rem; font-family: "GmarketSans";}
+.full-list .link-title{color:var(--font-color02); font-family: "GmarketSans";}
 .full-list .num{margin-right: 10px;}
 .full-list .desc{word-wrap: break-word; word-break: keep-all;}
 .full-list .desc p{}
@@ -56,6 +56,10 @@ border-top: 2px solid var(--main-bg-color2);
 .lst-con{}
 .lst-con .img-inner img{ }
 
+/* list */
+.list{}
+.list > li {display: flex; align-items: center; justify-content: flex-start;   padding: 0.5rem 0; }
+.list .title{margin-right: 2rem; border-radius: .3rem; background-color: var(    --main-bg-color); font-weight: bold;}
 /* info-row */
 .info-row{display: flex; margin: 2rem 0; align-items: center;}
 

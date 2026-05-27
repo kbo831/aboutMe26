@@ -3,6 +3,8 @@ import {ref,onMounted,onUnmounted,nextTick} from 'vue';
 export default {
     name : 'PortfolioSection', // 컴포넌트 이름
     setup(){ 
+        //프로젝트 상세보기 버튼
+        const isExpanded = ref(false);
         // 포트폴리오 제목 fade-in 애니메이션 
         const initTitleObserver=()=>{
             //감시할 태그 제목
@@ -155,7 +157,10 @@ export default {
                 }
         });
 
-        return {};
+        return {
+
+            isExpanded,//템플릿에서 사용 할 수 있도록 반환
+        };
     },
     //html 마크업
     template: `
@@ -168,9 +173,9 @@ export default {
         <!-- 책갈피(Bookmark Nav): 화면 한쪽에 고정될 네비게이션 -->
         <nav class="portfolio-bookmark">
             <ul>
-                <li class="active" data-slide="0"><a href="#void"><span>01. 도서판매</span></a></li>
-                <li data-slide="1"><a href="#void"><span>02. 얼굴로그인</span></a></li>
-                <li data-slide="2"><a href="#void"><span>03. 준비중</span></a></li>
+                <li class="active" data-slide="0"><a href="#void"><span>01.얼굴로그인</span></a></li>
+                <li data-slide="1"><a href="#void"><span>02.GIS</span></a></li>
+                <li data-slide="2"><a href="#void"><span>03.도서판매</span></a></li>
             </ul>
         </nav>
         <!-- Scroll Wrap: 실제 세로로 움직이거나 고정되어 굴러갈 콘텐츠 상자 -->
@@ -183,48 +188,72 @@ export default {
                             <div class="lst-con left">
                                 <h3 class="link-title"><i class="num">01.</i>
                                 얼굴로그인
-                                <a class="btn git icon" href="https://github.com/TaengAndJong/faceLogin.git" title="프로젝트 원격저장소 바로가기"  target="_blank">
-                                        <span class="sr-only">프로젝트 원격저장소 바로가기 버튼</span>
-                                </a>
+                              
                                 </h3>
                                 
                                 <div class="desc">
-                                    <p>회원가입 시, 아이디와 사용자 얼굴 </p>
-                                    <strong class="desc-title">클라이언트</strong>                                
-                                
-                                    <strong class="desc-title">구축언어</strong>
-                                    <ul class="skill">
+                                    <h4 class="desc-title">프로젝트 설명</h4>
+                                   
+                                    <p class="summary">
+                                        <span class="title">얼굴 인식(MediaPipe)기반 다중 인증(MFA)을 활용한 보안 로그인 시스템 프로젝트</span>
+                                        Webcam 이미지에서 MediaPipe로 얼굴 벡터를 추출하고, Redis와 JWT를 활용해 2차 인증을 구현한 보안 프로젝트입니다.
+                                    </p>
+                                    <button @click="isExpanded = !isExpanded" class="btn basic-btn" id="toggle-btn">
+                                    {{ isExpanded ? '상세설명 닫기 ▲' : '상세설명 보기 ▼' }}
+                                    </button>
+                                    <!-- 상세설명 --> 
+                                    <div v-show="isExpanded" class="detailed-content">
+                                        <!-- 회원가입 흐름-->
+                                        <strong class="desc-title">회원가입 흐름</strong>
+                                        <p>웹캠 촬영 ➔ Spring Boot ➔ Python 서버 (MediaPipe 얼굴 인식) ➔ 벡터 변환 ➔ Spring Security 인증 ➔ DB 저장
+                                        </p>
+                                        <!-- 로그인흐름-->
+                                        <strong class="desc-title">로그인흐름</strong>
+                                        <p>
+                                            웹캠 촬영 ➔ 얼굴 일치도 검증
+                                            <ul>
+                                                <li>
+                                                    <strong>일치도 높음:</strong> 
+                                                    로그인 성공 (JWT 발급)
+                                                </li>
+                                                <li>
+                                                    <strong>일치도 낮음:</strong> 
+                                                    이메일 인증 발송 (Redis에 인증번호 TTL 저장)
+                                                    <span>
+                                                    인증 성공 ➔ 로그인 성공 (JWT 발급)
+                                                    </span>
+                                                </li>
+                                            <ul>
+                                        </p>
+
+                                        <ul>
+                                            <li><strong>얼굴 데이터 벡터화:</strong> MediaPipe를 활용해 얼굴 영역을 감지하고 고차원 벡터 임베딩 데이터로 변환 후 DB 저장</li>
+                                            <li><strong>Redis 예외 처리:</strong> 얼굴 일치도 미달 시 이메일 인증번호를 생성하고 Redis 캐시(TTL)를 통해 유효성 검증</li>
+                                            <li><strong>상태 관리:</strong> JWT를 적용하여 Spring Security 환경에서 세션리스 인증 체계 구축</li>
+                                        </ul>
+                                        
+                                        <a class="btn git icon" href="https://github.com/TaengAndJong/faceLogin.git" title="프로젝트 원격저장소 바로가기"  target="_blank">
+                                            <span class="sr-only">프로젝트 원격저장소 바로가기 버튼</span>
+                                        </a>
+                                    </div>
+                                    <!-- 상세설명 --> 
+                                    <h4 class="desc-title">기술스택</h4>
+                                    <ul class="list skill-list">
                                         <li>
-                                            <i class="skill-icon java"></i>
-                                            <p class="sr-only">java</p>
+                                            <strong class="title tultip">Backend</strong>
+                                            Java, Spring Boot, Spring Security, Python
                                         </li>
                                         <li>
-                                            <i class="skill-icon react"></i>
-                                            <p class="sr-only">react</p>
+                                           <strong class="title tultip">Database & Vector Search</strong>
+                                           PostgreSQL, pgvector
                                         </li>
                                         <li>
-                                            <i class="skill-icon vite"></i>
-                                            <p class="sr-only">vite</p>
+                                             <strong class="title tultip">AI & Vision</strong>
+                                             Hugging Face
                                         </li>
                                         <li>
-                                            <i class="skill-icon spring_boot"></i>
-                                            <p class="sr-only">spring boot</p>
-                                        </li>
-                                        <li>
-                                            <i class="skill-icon spring_security"></i>
-                                            <p class="sr-only">spring security</p>
-                                        </li>
-                                        <li>
-                                            <i class="skill-icon sass"></i>
-                                            <p class="sr-only">sasse</p>
-                                        </li>
-                                        <li>
-                                            <i class="skill-icon figma"></i>
-                                            <p class="sr-only">figma</p>
-                                        </li>
-                                        <li>
-                                            <i class="skill-icon photoshop"></i>
-                                            <p class="sr-only">photoshop</p>
+                                           <strong class="title tultip">DevOps</strong>
+                                           Docker
                                         </li>
                                     </ul>
 
