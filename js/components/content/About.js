@@ -34,7 +34,7 @@ export default {
                 const slides = document.querySelectorAll('.about-slide'); //자식슬라이드 전체 지칭
                 const totalSlides= slides.length; //자식슬라이드 개수
                 const navItems = document.querySelectorAll('.about-bookmark li');
-
+              
 
             //함수형으로 선언해야 실시간(새로고침, 리사이징)으로 수치연산가능
             const portfolioTimeline =  gsap.to(horizontalWrap, {
@@ -59,9 +59,27 @@ export default {
                             duration:{ min: 0, max: 0.5 }, // snap 애니메이션 시간
                             delay: 0.1, // snap 재사용 대기시간
                             ease: 'power1.inOut' // 부드러운 가속도 효과
-                        }
-                        //snap end
+                        },
+                        //onUpdate - 스크롤 실시간 이동 감지
+                        onUpdate:(self) =>{
+                            const progress = self.progress; // 0 ~ 1 사이의 현재 진행도
+                            // 현재 어떤 슬라이드가 활성화되어야 하는지 인덱스 계산 (반올림 처리로 snap과 동기화)
+                            let activeIndex = Math.round(progress * (totalSlides - 1));
+                            // 안전장치 (0 미만이나 최대 개수를 넘지 않도록 제한)
+                            activeIndex = Math.max(0, Math.min(activeIndex, totalSlides - 1));
 
+                          
+                            // 네비게이션 아이템 클래스 토글
+                            navItems.forEach((nav, idx) => {
+                                const link = nav.querySelector('a');
+                                if (idx === activeIndex) {
+                                    link.classList.add('active');
+                                } else {
+                                    link.classList.remove('active');
+                                }
+                            });
+                        }
+                        //onUpdate end
                     }
                     //scrollTrigger end
                 });
@@ -70,11 +88,22 @@ export default {
 
                  //책갈피 클릭 기능
                     navItems.forEach((nav, idx) => {
+                        // 클릭 이동
                         nav.addEventListener('click', (e) => {
                             e.preventDefault(); // <a> 태그의 기본 이동 기능 막기
-                            navItems.forEach(item => item.classList.remove('active'));
 
-                            nav.classList.add("active");
+                           //전체 a 에 책갈피 클래스 전체 제거
+                           navItems.forEach(item => {
+                                //nav(li) 하위의 a 태그 지칭
+                                const link = item.querySelector('a'); 
+                                // a 요소 있을 경우, 기존 active 제거
+                                if (link) link.classList.remove('active');
+                            });
+
+                            //클릭한 책갈피 클래스 추가
+                            const currentLink = nav.querySelector('a');
+                            if (currentLink) currentLink.classList.add("active");
+                            
                             // 전체 스크롤트리거의 시작(start)점과 끝(end)점 위치 구하기
                             const start = portfolioTimeline.scrollTrigger.start;
                             const end = portfolioTimeline.scrollTrigger.end;
@@ -93,6 +122,10 @@ export default {
                                 behavior: 'smooth' // 부드러운 스크롤 효과
                             });
                         });
+                        
+                        //스크롤 이동
+                        
+
                     }); // 책갈피 클릭 스크롤 기능 end
 
             });

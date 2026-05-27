@@ -75,7 +75,7 @@
     height: 100%;}
 
 .about-slide h2{}
-.about-slide h3{font-size: 3rem; }
+.about-slide h3{padding: 0.8rem;font-size: 3rem;}
 .about-slide .object{z-index: -1;width: 25vw;height: 28vh;right: -20%;bottom: 0;}
 .about-slide .row-list li{padding: 0 6vw;display: flex;align-items: flex-start;justify-content: center;flex-direction: column;/* text-align: left; */}
 
