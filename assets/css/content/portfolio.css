@@ -9,8 +9,10 @@
 /* portfolio */
 .portfolio-trigger-section{width:100%;height:auto}
 .portfolio-scroll-wrap{width:100%;height:auto;position:relative}
+.portfolio-scroll-wrap  .desc-list{margin-left: 2rem;}
 [class *="-list"].portfolio-scroll-wrap {position:relative;width:100%;height:auto;margin:0;padding:0}
 [class *="-list"].portfolio-scroll-wrap  .li{background-color:var(--main-bg-color);position:relative;top:0;left:0;width:100%;height:auto;min-height:100vh;padding:6rem 2rem;overflow:visible;-webkit-overflow-scrolling:touch;background-color:var(--main-bg-color)}
+
 [class *="-list"].portfolio-scroll-wrap  .link{justify-content:space-between;gap:2rem}
 [class *="-list"].portfolio-scroll-wrap  .lst-con.right{max-width:46rem;align-self:flex-start}
 .portfolio-scroll-wrap .detailed-content{display:block;width:100%;height:auto;padding-bottom:4rem}

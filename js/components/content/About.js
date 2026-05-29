@@ -283,27 +283,27 @@ export default {
                         <div class="slide-inner sc-con">
                         
                             <h2>
-                               <span className="object img01"></span>
+                               <span class="object img01"></span>
                                 나를 설명하는 키워드
-                              <span className="object img02"></span>
+                              <span class="object img02"></span>
                             </h2>
                             <ul class="row-list keyword">
                                 <li>
-                                    <span className="object img01"></span>
+                                    <span class="object img01"></span>
                                     <h3>'왜'라는 질문을 하는 </h3>
                                     <p>
                                         단순히 기능을 구현하는 것보다 왜 그렇게 동작하는지, 어떤 흐름으로 연결되는지를 이해하는 과정을 중요하게 생각합니다.
                                     </p>
                                 </li>
                                 <li>
-                                    <span className="object img02"></span>
+                                    <span class="object img02"></span>
                                     <h3>깊게 몰입하는 </h3>
                                     <p>
                                         하나의 문제를 오래 붙잡고 원인을 분석하며 스스로 납득할 때까지 고민하는 성향입니다.
                                     </p>
                                 </li>
                                 <li>
-                                    <span className="object img03"></span>
+                                    <span class="object img03"></span>
                                     <h3>끊임없이 성장하려는 </h3>
                                     <p>
                                        하루를 돌아보며 부족했던 점과 개선할 부분을 스스로 점검하는 시간을 중요하게 생각합니다.
@@ -316,9 +316,9 @@ export default {
                     <article class="about-slide bg04">
                         <div class="slide-inner sc-con">
                             <h2>
-                             <span className="object img01"></span>
+                             <span class="object img01"></span>
                                 나의 강점
-                              <span className="object img02"></span>
+                              <span class="object img02"></span>
                             </h2>
             
                             <ul class="row-list strength">
@@ -364,9 +364,8 @@ export default {
                                 </li>
                                 <li>
                                     <h3>성찰</h3>
-                                    <p>하루를 돌아보며 부족했던 부분을 개선하고 더 나은 방향으로 성장하고자 노력합니다.</p>
+                                    <p>하루를 되돌아보며 통해 부족했던 점을 생각해보고 개선하고자 노력합니다.</p>
                                 </li>
-                               
                             </ul>
                         </div>
                     </article>

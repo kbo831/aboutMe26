@@ -209,7 +209,7 @@ export default {
                         <figure class="lst-con right">
                             <div class="img-box">
                                 <div class="img-inner">
-                                    <img src="../../assets/image/portfolio/theBook/theBook.jpg" alt="얼굴로그인 이미지">
+                                     <img src="assets/image/common/faceLogin.jpg" alt="얼굴로그인 이미지">
                                 </div>
                             </div>
                         </figure>
@@ -245,7 +245,8 @@ export default {
                         <figure class="lst-con right">
                             <div class="img-box">
                                 <div class="img-inner">
-                                    <img src="../../assets/image/portfolio/theBook/theBook.jpg" alt="GIS 이미지">
+                                        <span class="no-image"></span>
+                                   <!-- <img src="../../assets/image/common/noImage.png" alt="GIS 이미지"> -->
                                 </div>
                             </div>
                         </figure>
@@ -278,7 +279,7 @@ export default {
                         <figure class="lst-con right">
                             <div class="img-box">
                                 <div class="img-inner">
-                                    <img src="../../assets/image/portfolio/theBook/theBook.jpg" alt="도서판매 이미지">
+                                    <img src="assets/image/portfolio/theBook/theBook.jpg" alt="도서판매 이미지">
                                 </div>
                             </div>
                         </figure>
