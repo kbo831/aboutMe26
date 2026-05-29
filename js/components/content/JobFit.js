@@ -54,7 +54,7 @@ export default {
                         <!-- left -card -->
                         <div class="side-card left-card row-card">
                             <h3>
-                                <span class="font-point">AI 이전</span>
+                                <span class="font-point"><AI 이전></span>
                                 원인을 추적하고 흐름을 연결하는 집요함
                             </h3>
                             <ul class="left-list">
@@ -77,7 +77,7 @@ export default {
                             <span class="card-title center-title">개발 직무 적합성</span>
                             <div class="center-card-con">
                                 <h3> 
-                                    <span class="font-point">현재의 나</span>
+                                    <span class="font-point"><현재의 나></span>
                                     구조를 이해하고 깊게 몰입하는 성장형 개발자
                                 </h3>
                                 <ul class="left-list">
@@ -103,7 +103,7 @@ export default {
                         <!-- right -card -->
                         <div class="side-card right-card row-card">
                              <h3>
-                                <span class="font-point">AI 이후</span>
+                                <span class="font-point"><AI 이후></span>
                                 AI의 결과를 의심하고 방향을 설정하는 리더십
                             </h3>
                             <ul class="left-list">

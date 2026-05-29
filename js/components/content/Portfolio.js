@@ -142,11 +142,14 @@ export default {
                     <a href="#void" @click.prevent="scrollToCard(0)"><span>01.얼굴로그인</span></a>
                 </li>
                 <li data-slide="1">
-                    <a href="#void" @click.prevent="scrollToCard(1)"><span>02.GIS</span></a>
+                    <a href="#void" @click.prevent="scrollToCard(1)"><span>02.도서판매</span></a>
                 </li>
                 <li data-slide="2">
-                    <a href="#void" @click.prevent="scrollToCard(2)"><span>03.도서판매</span></a>
+                    <a href="#void" @click.prevent="scrollToCard(2)"><span>03.GIS</span></a>
                 </li>
+               <!-- <li data-slide="3">
+                    <a href="#void" @click.prevent="scrollToCard(3)"><span>04.추천시스템</span></a>
+                </li> -->
             </ul>
         </nav>
         
@@ -222,11 +225,97 @@ export default {
                         <li><strong class="title tultip">DevOps</strong> Docker</li>
                     </ul>
                 </div>
-                
+
                 <div class="li portfolio-card">
                     <div class="seperate-con">
                         <div class="lst-con left">
-                            <h3 class="link-title"><i class="num">02.</i>GIS</h3>
+                            <h3 class="link-title"><i class="num">02.</i>도서판매(the book)</h3>
+                            <h4 class="desc-title">프로젝트 설명</h4>
+                            <div class="desc-sc">
+                               <h5 class="title desc-b_title">React(Vite) 및 Spring Boot 기반의 역할별 권한 분리 도서 판매 서비스</h5>
+                                <p>
+                                    React와 고속 빌드 도구인 Vite를 사용한 프론트엔드와 Java/Spring Boot 기반의 백엔드를 독립적으로 구현하고 Spring Security Filter를 활용하여 일반 사용자와 관리자의 역할(Role)에 따른 권한 인가를 분리함으로써 각 권한에 맞는 서비스를 제공하도록 구축한 프로젝트
+                                </p>
+                                <p>(예외처리, 책임분리 수정 예정 - 6월 )</p>
+                            </div>
+                            <button @click="toggleExpand('book')" class="btn basic-btn">
+                                {{ isExpanded['book'] ? '상세설명 닫기' : '상세설명 보기' }}
+                            </button>
+                            <a class="btn basic-btn" href="https://github.com/TaengAndJong/team01.git" target="_blank">원격저장소</a>
+                            <a class="btn basic-btn" href="assets/doc/UISpecification.pdf" target="_blank">화면정의서</a>
+
+                             <div v-show="isExpanded['book']" class="desc-sc">
+                               <strong class="title">&#9654;&nbsp;공통 권한</strong>
+                                <ol class="common-list desc-list basic">
+                                    <li>사용자 메인 화면 조회</li>
+                                    <li>로그인 화면 조회</li>
+                                    <li>회원가입</li>
+                                    <li>도서 조회 / 검색</li>
+                                </ol>
+                                <!-- 사용자 -->
+                                <strong class="title">&#9654;&nbsp;회원 권한</strong>
+                                <ol class="user-list desc-list basic">
+                                    <li>회원가입</li>
+                                    <li>로그인</li>
+                                    <li class="none-bulit">
+                                        <strong class="title">&#9654;&nbsp;마이페이지</strong>
+                                        <ol class="mypage-list desc-list basic">
+                                            <li>개인정보 조회 / 수정</li>
+                                            <li>배송지 등록 / 수정 / 삭제</li>
+                                            <li>결제내역 조회 / 취소</li>
+                                            <li>장바구니 상품 결제 후 재추가</li>
+                                            <li>찜 목록 등록 / 해제 / 상품 상세 이동</li>
+                                        </ol>
+
+                                        <strong class="title">&#9654;&nbsp;장바구니</strong>
+                                        <ol class="cart-list desc-list basic">
+                                            <li>상품 추가 / 삭제</li>
+                                        </ol>
+
+                                        <strong class="title">&#9654;&nbsp;결제</strong>
+                                        <ol class="pay-list desc-list basic">
+                                            <li>단건 / 전체 / 바로 구매</li>
+                                        </ol>
+                                    </li>
+                                </ol>
+                                <!-- 사용자-->
+                                <!-- 관리자-->
+                                <strong class="title">&#9654;&nbsp;관리자 권한 - 도서 관리</strong>
+                                <ol class="book-list desc-list basic">
+                                    <li>도서 조회 / 등록 / 수정 / 삭제</li>
+                                </ol>
+
+                                <strong class="title">&#9654;&nbsp;관리자 권한 - 문의 관리</strong>
+                                <ol class="qna-list desc-list basic">
+                                    <li>문의 답변 / 답변 / 수정/ 삭제</li>
+                                </ol>
+                                <!-- 관리자-->
+                                
+                            </div>
+                            <!-- desc-sc 끝-->
+                        </div>
+                        <!-- lst-con.left 끝-->
+                        <figure class="lst-con right">
+                            <div class="img-box">
+                                <div class="img-inner">
+                                    <img src="assets/image/portfolio/theBook/theBook.jpg" alt="도서판매 이미지">
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
+                    <h4 class="desc-title">기술스택</h4>
+                    <ul class="list skill-list">
+                        <li><strong class="title tultip">Languages</strong> Java, JavaScript, SQL</li>
+                        <li><strong class="title tultip">Front-end</strong> HTML5, CSS3, Sass, React</li>
+                        <li><strong class="title tultip">Back-end</strong> Spring Boot, Spring Security</li>
+                        <li><strong class="title tultip">Animation</strong> Swiper, GSAP</li>
+                    </ul>
+                </div>
+
+                <div class="li portfolio-card">
+                    <div class="seperate-con">
+                        <div class="lst-con left">
+                            <h3 class="link-title"><i class="num">03.</i>GIS</h3>
                             <h4 class="desc-title">프로젝트 설명</h4>
                             <div class="desc-sc">
                                 <h5 class="title desc-b_title">공간 데이터 활용 시스템</h5>
@@ -258,40 +347,7 @@ export default {
                     </ul>
                 </div>
                 
-                <div class="li portfolio-card">
-                    <div class="seperate-con">
-                        <div class="lst-con left">
-                            <h3 class="link-title"><i class="num">03.</i>도서판매(the book)</h3>
-                            <h4 class="desc-title">프로젝트 설명</h4>
-                            <div class="desc-sc">
-                                <h5 class="title desc-b_title">도서판매 서비스</h5>
-                                <p>일반회원과 관리자로 권한을 분리한 도서 판매관리 서비스 (예외처리, 책임분리 수정 예정 - 6월 )</p>
-                            </div>
-                            <button @click="toggleExpand('book')" class="btn basic-btn">
-                                {{ isExpanded['book'] ? '상세설명 닫기' : '상세설명 보기' }}
-                            </button>
-                            <a class="btn basic-btn" href="https://github.com/TaengAndJong/faceLogin.git" target="_blank">원격저장소</a>
-                             <div v-show="isExpanded['book']" class="desc-sc">
-                                상세보기 준비중
-                            </div>
-
-                        </div>
-                        <figure class="lst-con right">
-                            <div class="img-box">
-                                <div class="img-inner">
-                                    <img src="assets/image/portfolio/theBook/theBook.jpg" alt="도서판매 이미지">
-                                </div>
-                            </div>
-                        </figure>
-                    </div>
-                    <h4 class="desc-title">기술스택</h4>
-                    <ul class="list skill-list">
-                        <li><strong class="title tultip">Languages</strong> Java, JavaScript, SQL</li>
-                        <li><strong class="title tultip">Front-end</strong> HTML5, CSS3, Sass, React</li>
-                        <li><strong class="title tultip">Back-end</strong> Spring Boot, Spring Security</li>
-                        <li><strong class="title tultip">Animation</strong> Swiper, GSAP</li>
-                    </ul>
-                </div>
+                
                 
             </div>
         </div>
