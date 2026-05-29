@@ -177,7 +177,7 @@ export default {
                                 {{ isExpanded['faceLogin'] ? '상세설명 닫기' : '상세설명 보기' }}
                             </button>
                             <a class="btn basic-btn" href="https://github.com/TaengAndJong/faceLogin.git" target="_blank">원격저장소</a>
-                            
+                            <a class="btn basic-btn" href="assets/doc/UISpecification_faceLogin.pdf" target="_blank">화면정의서</a>
                             <div v-show="isExpanded['faceLogin']" class="desc-sc">
                                 <strong class="title">&#9654;&nbsp;회원가입 상세</strong>
                                 <ol class="register-list desc-list basic">
@@ -242,7 +242,7 @@ export default {
                                 {{ isExpanded['book'] ? '상세설명 닫기' : '상세설명 보기' }}
                             </button>
                             <a class="btn basic-btn" href="https://github.com/TaengAndJong/team01.git" target="_blank">원격저장소</a>
-                            <a class="btn basic-btn" href="assets/doc/UISpecification.pdf" target="_blank">화면정의서</a>
+                            <a class="btn basic-btn" href="assets/doc/UISpecification_thebook.pdf" target="_blank">화면정의서</a>
 
                              <div v-show="isExpanded['book']" class="desc-sc">
                                <strong class="title">&#9654;&nbsp;공통 권한</strong>
