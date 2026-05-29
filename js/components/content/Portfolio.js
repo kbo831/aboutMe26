@@ -263,8 +263,8 @@ export default {
                             <h3 class="link-title"><i class="num">03.</i>도서판매(the book)</h3>
                             <h4 class="desc-title">프로젝트 설명</h4>
                             <div class="desc-sc">
-                                <h5 class="title desc-b_title">이커머스 서비스</h5>
-                                <p>일반회원과 관리자로 권한을 분리한 도서 판매 웹 서비스 (예외처리, 책임분리 수정 중)</p>
+                                <h5 class="title desc-b_title">도서판매 서비스</h5>
+                                <p>일반회원과 관리자로 권한을 분리한 도서 판매관리 서비스 (예외처리, 책임분리 수정 예정 - 6월 )</p>
                             </div>
                             <button @click="toggleExpand('book')" class="btn basic-btn">
                                 {{ isExpanded['book'] ? '상세설명 닫기' : '상세설명 보기' }}
