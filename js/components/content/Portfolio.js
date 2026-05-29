@@ -1,423 +1,300 @@
-import {ref,onMounted,onUnmounted,nextTick} from 'vue';
+import { ref, onMounted, onUnmounted, nextTick } from "vue";
 
 export default {
-    name : 'PortfolioSection', // 컴포넌트 이름
-    setup(){ 
-        //프로젝트 상세보기 버튼
-        const isExpanded = ref(false);
-        // 포트폴리오 제목 fade-in 애니메이션 
-        const initTitleObserver=()=>{
-            //감시할 태그 제목
-            const title = document.querySelector('.portfolio-title');
-            if (!title) return; // 제목 없으면 코드 종료  
+  name: "PortfolioSection", // 컴포넌트 이름
+  setup() {
+    // 프로젝트 상세보기 버튼 상태 관리
+    const isExpanded = ref({});
 
-            //observer 객체 생성 
-            const observer = new IntersectionObserver((entries)=>{
-                entries.forEach(entry => {
+    // 상세보기 토글 함수
+    const toggleExpand = async (id) => {
+      if (isExpanded.value[id] === undefined) {
+        isExpanded.value[id] = false;
+      }
+      isExpanded.value[id] = !isExpanded.value[id];
+      await nextTick();
+    };
 
-                    if (entry.isIntersecting) {
-                        //화면에 들어왔으면 클래스 추가 애니메이션 실행
-                        entry.target.classList.add('is-visible');
-                    }else{
-                        entry.target.classList.remove('is-visible');
-                    }
-                });//entries end
-                
-            },{ // 제목이 화면 아래에서 위로 30% 보이면 애니메이션 트리거
-                threshold: 0.3
-            }); //observer end
-            
-            //제목 돔요소에 observer 감시 붙이기
-           observer.observe(title);
+    const scrollToCard = (index) => {
+      const cards = document.querySelectorAll(".portfolio-card");
+      if (cards[index]) {
+        cards[index].scrollIntoView({
+          behavior: "smooth", 
+          block: "center", 
+        });
+      }
+    };
 
-        };//initTitleObserver end 
-            
-        // 포트폴리오 목록 gsap
-        let portfolioTimeline;
+    //unmounted에서 해제할 수 있도록 observer 변수를 상위에 선언
+    let scrollObserver = null;
+    let bookmarkObserver = null;
 
-        const initPortfolioScroll = () =>{
-            const triggerSection = document.querySelector('.portfolio-trigger-section');
-            const cards = document.querySelectorAll('.ul.full-list .li');
-            const navItems = document.querySelectorAll('.portfolio-bookmark li');
+    // 포트폴리오 제목 & 카드 fade-in 애니메이션
+    const initScrollAnimation = () => {
 
-            if (!triggerSection || cards.length === 0) return; // 이벤트 트리거  요소, 카드 요소  없으면 종료
+    const portfolioSection = document.querySelector(".sc-portfolio"); //전체 섹션
+    const targets = document.querySelectorAll(".portfolio-title, .portfolio-card"); // 제목과 프로젝트 목록들
+    const bookmarkNav = document.querySelector(".portfolio-bookmark"); // 책갈피
 
-            portfolioTimeline= gsap.timeline({
-                
-                scrollTrigger : {
-                    trigger: triggerSection, // 애니메이션이 시작될 기준 구역
-                    pin: true,// trigger 영역 고정
-                    scrub: 1, //스크롤 휠의 움직임과 애니메이션 속도를 부드럽게 동기화,1초 딜레이
-                    start: "top top", // trigger 영역 맨 위가 화면 맨 위에 닿을 때 시작
-                    end: "+=300%", //스크롤을 아래로 300%만큼 내리는 동안 고정 유지
-                    pinSpacing: true,  // 고정풀릴때 튕김 방지
-                    invalidateOnRefresh: true, // 실시간 재연산
-                    // 실시간 스크롤 위치(진행도)에 따라 왼쪽 책갈피 메뉴 활성화
-                    onUpdate:(self)=>{
-                        // self.progress는 전체 스크롤 진행도 (0.0 ~ 1.0)
-                        const progress = self.progress;
-                        const totalCards = cards.length; // 카드 전체 개수
-                        let activeIndex = Math.min(Math.floor(progress * totalCards), totalCards - 1); 
-                        
-                        navItems.forEach((nav, idx) => {
-                            if (idx === activeIndex) { //활성화 인덱스와 li의 idx가 동일하면
-                                nav.classList.add('active'); //활성화 클래스 추가
-                            } else {
-                                nav.classList.remove('active');
-                            }
-                        });
-                   }//onUpdate end
+      if (targets.length === 0 && !portfolioSection) return; // 대상이 아무것도 없으면 중단
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            //감시 중인 요소가 '전체 포트폴리오 섹션'일 때
+            if (entry.target === portfolioSection) {
+                if (entry.isIntersecting) {
+                    bookmarkNav?.classList.add("is-visible");    // 책갈피 등장
+                } else {
+                    bookmarkNav?.classList.remove("is-visible"); // 책갈피 사라짐
                 }
-            }); // gsap end
-
-            ScrollTrigger.refresh(); //타임라인 정의가 모두 끝난 직후, GSAP에게 모든 요소의 위치를 재계산
-            //타임라인에 카드 올라오는 순서대로 동작 정의
-           cards.forEach((card, idx) => {
-                if (idx === 0) return; // 1번 카드는 이미 기본 배치되어 있으므로 패스
-
-                    gsap.set(card, { y: "100%" });
-                    portfolioTimeline.to(card, { 
-                    y: "0%", 
-                    ease: "none" 
-                });
-            });
-
-            //책갈피 클릭 기능
-            navItems.forEach((nav, idx) => {
-                nav.addEventListener('click', (e) => {
-                    e.preventDefault(); // <a> 태그의 기본 이동 기능 막기
-
-                    // 전체 스크롤트리거의 시작(start)점과 끝(end)점 위치 구하기
-                    const start = portfolioTimeline.scrollTrigger.start;
-                    const end = portfolioTimeline.scrollTrigger.end;
-                    const totalScrollDistance = end - start; // 고정되어 스크롤되는 총 길이
-
-                    // 카드가 전환되는 지점의 비율(progress)을 계산
-                    // 예: 카드 3개일 때 -> 0번 카드=0%, 1번 카드=50%, 2번 카드=100% 진행 지점
-                    const targetProgress = idx / (cards.length - 1);
-
-                    // 계산된 비율을 바탕으로 브라우저가 이동해야 할 실제 스크롤 Y축 위치를 구하기
-                    const targetScrollY = start + (totalScrollDistance * targetProgress);
-
-                    // 4. window.scrollTo를 사용해 해당 위치로 스크롤 
-                    window.scrollTo({
-                        top: targetScrollY,
-                        behavior: 'smooth' // 부드러운 스크롤 효과
-                    });
-                });
-            }); // 책갈피 클릭 스크롤 기능 end
-
-        }//initPortfolioScroll end
-
-        onMounted(()=>{
-
-            const csshref= './assets/css/content/portfolio.css';
-            let cssLink = document.querySelector(`link[href*="portfolio.css"]`);
-            
-            //  DOM과 스타일(CSS)이 모두 준비되었을 때 안전하게 실행할 비동기 함수
-            const startPortfolioLogic = async () => {
-                // Vue가 template 마크업을 실제 DOM에 완전히 반영할 때까지 대기
-                await nextTick(); 
-                
-                initTitleObserver();  // 제목 페이드인 오Observer 실행
-                initPortfolioScroll(); // GSAP 스크롤 애니메이션 실행
-                
-                // 브라우저가 최종 스타일을 확정 짓도록 50ms 미세 딜레이 후 GSAP 위치 재연산
-                setTimeout(() => {
-                    if (typeof ScrollTrigger !== 'undefined') {
-                        ScrollTrigger.refresh();
-                    }
-                }, 50);
-            };
-
-
-            // html 문서 전체에서 괄호 내 태그 찾기 => CSS를 불러오는 <link> 태그 중에서, href(경로)에 about.css 포함된 태그 
-            if (!cssLink){ 
-                cssLink = document.createElement('link'); //태그 생성
-                cssLink.rel = 'stylesheet';
-                cssLink.href = csshref;
-                document.head.appendChild(cssLink); //head 태그에 추가
-                
-                //CSS 로딩이 '완료'되는 순간을 확인하면 실행
-                cssLink.onload = () => {
-                    startPortfolioLogic();
-                };
-            }else {
-                // 이미 CSS가 head에 존재한다면 즉시 실행
-                startPortfolioLogic();
             }
-            
-        });
-
-        onUnmounted(() => {
-                // 페이지를 이동하거나 컴포넌트가 사라질 때 고정된 스크롤 메모리를 해제해야 버그가 안 생김
-                if (portfolioTimeline) {
-                    portfolioTimeline.scrollTrigger.kill();
-                    portfolioTimeline.kill();
+           else {  //감시 중인 요소가 기존 '제목'이나 '카드'일 때
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");        // 페이드인 애니메이션 켬
+                } else {
+                    entry.target.classList.remove("is-visible");     // 페이드인 애니메이션 끔
                 }
-        });
+            }
+          });
+          //끝
+        },
+       { threshold: [0.02, 0.3] }
+      );
+    if (portfolioSection) observer.observe(portfolioSection); // 전체 섹션 감시 등록
+    targets.forEach((target) => observer.observe(target));    // 개별 제목/카드 감시 등록
+    };
 
-        return {
+    // 책갈피 활성화 감시 함수
+    const initBookmarkObserver = () => {
+      const cards = document.querySelectorAll(".portfolio-card");
+      const bookmarkItems = document.querySelectorAll(".portfolio-bookmark li");
 
-            isExpanded,//템플릿에서 사용 할 수 있도록 반환
+      if (cards.length === 0 || bookmarkItems.length === 0) return;
+
+      const bookmarkObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const index = Array.from(cards).indexOf(entry.target);
+              if (index !== -1) {
+                bookmarkItems.forEach((item) => item.classList.remove("active"));
+                bookmarkItems[index].classList.add("active");
+              }
+            }
+          });
+        },
+        {
+          rootMargin: "-20% 0px -40% 0px",
+          threshold: 0.1, 
+        }
+      );
+
+      cards.forEach((card) => bookmarkObserver.observe(card));
+    };
+
+    onMounted(() => {
+      const csshref = "./assets/css/content/portfolio.css";
+      let cssLink = document.querySelector(`link[href*="portfolio.css"]`);
+
+      const startPortfolioLogic = async () => {
+        await nextTick();
+        initScrollAnimation();
+        initBookmarkObserver(); 
+      };
+
+      if (!cssLink) {
+        cssLink = document.createElement("link");
+        cssLink.rel = "stylesheet";
+        cssLink.href = csshref;
+        document.head.appendChild(cssLink);
+
+        cssLink.onload = () => {
+          startPortfolioLogic();
         };
-    },
-    //html 마크업
-    template: `
-<section class="sc sub-content">
+      } else {
+        startPortfolioLogic();
+      }
+    });
+
+    //unmounted의 진짜 역할: 페이지 이동 시 브라우저 메모리 최적화 및 에러 방지
+    onUnmounted(() => {
+      // 필요 시 인스턴스 해제 로직 작성 공간
+        if (scrollObserver) scrollObserver.disconnect();
+        if (bookmarkObserver) bookmarkObserver.disconnect();
+    });
+
+    return {
+      isExpanded, 
+      toggleExpand,
+      scrollToCard, // 이제 스코프가 맞아 정상적으로 반환됩니다.
+    };
+  },
+  
+  template: `
+<section class="sc sub-content sc-portfolio">
     <div class="sc-inner">
-    
-    <!-- Trigger 구역: 스크롤을 감지하고 전체를 고정(Pin)할 구역 -->
-    <div id="portfolio" class="portfolio-trigger-section">
         <h2 class="portfolio-title">Portfolio</h2>
-        <!-- 책갈피(Bookmark Nav): 화면 한쪽에 고정될 네비게이션 -->
+        
         <nav class="portfolio-bookmark">
             <ul>
-                <li class="active" data-slide="0"><a href="#void"><span>01.얼굴로그인</span></a></li>
-                <li data-slide="1"><a href="#void"><span>02.GIS</span></a></li>
-                <li data-slide="2"><a href="#void"><span>03.도서판매</span></a></li>
+                <li class="active" data-slide="0">
+                    <a href="#void" @click.prevent="scrollToCard(0)"><span>01.얼굴로그인</span></a>
+                </li>
+                <li data-slide="1">
+                    <a href="#void" @click.prevent="scrollToCard(1)"><span>02.GIS</span></a>
+                </li>
+                <li data-slide="2">
+                    <a href="#void" @click.prevent="scrollToCard(2)"><span>03.도서판매</span></a>
+                </li>
             </ul>
         </nav>
-        <!-- Scroll Wrap: 실제 세로로 움직이거나 고정되어 굴러갈 콘텐츠 상자 -->
-        <div class="portfolio-scroll-wrap">
-            <!-- 포트폴리오 ul -->
-                <ul class="ul full-list">
-                    <!--Start: faceLogin -->
-                    <li class="li">
-                        <div  class="link">
-                            <div class="lst-con left">
-                                <h3 class="link-title"><i class="num">01.</i>
-                                얼굴로그인
-                              
-                                </h3>
-                                
-                                <div class="desc">
-                                    <h4 class="desc-title">프로젝트 설명</h4>
-                                   
-                                    <p class="summary">
-                                        <span class="title">얼굴 인식(MediaPipe)기반 다중 인증(MFA)을 활용한 보안 로그인 시스템 프로젝트</span>
-                                        Webcam 이미지에서 MediaPipe로 얼굴 벡터를 추출하고, Redis와 JWT를 활용해 2차 인증을 구현한 보안 프로젝트입니다.
-                                    </p>
-                                    <button @click="isExpanded = !isExpanded" class="btn basic-btn" id="toggle-btn">
-                                    {{ isExpanded ? '상세설명 닫기 ▲' : '상세설명 보기 ▼' }}
-                                    </button>
-                                    <!-- 상세설명 --> 
-                                    <div v-show="isExpanded" class="detailed-content">
-                                        <!-- 회원가입 흐름-->
-                                        <strong class="desc-title">회원가입 흐름</strong>
-                                        <p>웹캠 촬영 ➔ Spring Boot ➔ Python 서버 (MediaPipe 얼굴 인식) ➔ 벡터 변환 ➔ Spring Security 인증 ➔ DB 저장
-                                        </p>
-                                        <!-- 로그인흐름-->
-                                        <strong class="desc-title">로그인흐름</strong>
-                                        <p>
-                                            웹캠 촬영 ➔ 얼굴 일치도 검증
-                                            <ul>
-                                                <li>
-                                                    <strong>일치도 높음:</strong> 
-                                                    로그인 성공 (JWT 발급)
-                                                </li>
-                                                <li>
-                                                    <strong>일치도 낮음:</strong> 
-                                                    이메일 인증 발송 (Redis에 인증번호 TTL 저장)
-                                                    <span>
-                                                    인증 성공 ➔ 로그인 성공 (JWT 발급)
-                                                    </span>
-                                                </li>
-                                            <ul>
-                                        </p>
+        
+        <div id="portfolio" class="portfolio-trigger-section">
+            <div class="ul full-list portfolio-scroll-wrap">
+                
+                <div class="li portfolio-card">
+                    <div class="seperate-con">
+                        <div class="lst-con left">
+                            <h3 class="link-title"><i class="num">01.</i>얼굴로그인</h3>
+                            <h4 class="desc-title">프로젝트 설명</h4>
+                            <div class="desc-sc">
+                                <h5 class="title desc-b_title">얼굴 인식(MediaPipe)기반 다중 인증(MFA)을 활용한 보안 로그인 시스템</h5>
+                                <p>Webcam 이미지에서 MediaPipe로 얼굴 벡터를 추출하고, Redis와 JWT를 활용해 2차 인증을 구현한 보안 프로젝트입니다.</p>
+                            </div>
+                            
+                            <div class="desc-sc">
+                                <strong class="title desc-S_title">회원가입 흐름</strong>
+                                <p>아이디 중복검증/이메일 OTP 인증 ➔ 동의 확인 ➔ 웹캠 촬영 ➔ Spring Boot 전송 및 2차검증 ➔ Python 서버 얼굴 임베딩 생성 ➔ pgvector 기반 얼굴 벡터 저장</p> 
+                                <strong class="title desc-s_title">로그인흐름</strong>
+                                <p>웹캠 촬영 ➔ Python 서버 얼굴 임베딩 생성 ➔ pgvector 유사도 비교 ➔ Custom Provider 인증 ➔ 결과 처리</p>
+                            </div>
+                             
+                            <button @click="toggleExpand('faceLogin')" class="btn basic-btn">
+                                {{ isExpanded['faceLogin'] ? '상세설명 닫기' : '상세설명 보기' }}
+                            </button>
+                            <a class="btn basic-btn" href="https://github.com/TaengAndJong/faceLogin.git" target="_blank">원격저장소</a>
+                            
+                            <div v-show="isExpanded['faceLogin']" class="desc-sc">
+                                <strong class="title">&#9654;&nbsp;회원가입 상세</strong>
+                                <ol class="register-list desc-list basic">
+                                    <li>사용자 아이디 중복 여부를 확인</li>
+                                    <li>이메일 OTP 인증 (javaMail, Redis TTL 캐시 사용)</li>
+                                    <li>웹캠 이미지 Spring Boot 서버로 전송</li>
+                                    <li>RegisterReqDto 데이터 2차 검증 수행</li>
+                                    <li>Python 서버에 얼굴 이미지 분석 요청</li>
+                                    <li>MediaPipe + ResNet 기반 512차원 얼굴 벡터 반환</li>
+                                    <li>MyBatis를 사용하여 users, facevector 테이블에 저장</li>
+                                </ol>
+                                <strong class="title">&#9654;&nbsp;로그인 상세</strong>
+                                <ol class="login-list desc-list basic">
+                                    <li>웹캠 이미지를 Spring Boot 서버로 전송</li>
+                                    <li>Face Login Service를 거쳐 Python 서버로 파일 전달</li>
+                                    <li>ResNet 모델로 512차원 얼굴 임베딩 벡터 생성 후 반환</li>
+                                    <li>미인증(Pre-Auth) 토큰 생성 후 Custom AuthenticationProvider 전달</li>
+                                    <li>pgvector를 사용하여 코사인 유사도 비교 검증</li>
+                                    <li>결과에 따라 인증 성공, OTP 추가 인증, 실패 분기</li>
+                                    <li>인증 성공 시 SecurityContext에 저장 및 최종 응답</li>
+                                </ol>
+                                <strong class="title">&#9654;&nbsp;이메일 OTP 상세</strong>
+                                <ol class="email-list desc-list basic">
+                                    <li>이메일과 OTP 인증 타입(login/register) 서버 전송</li>
+                                    <li>Redis Key 생성 및 6자리 랜덤 OTP 코드 3분 만료 설정 저장</li>
+                                    <li>JavaMailSender를 통한 OTP 코드 발송</li>
+                                    <li>BindingResult 및 SmartValidator를 활용한 동적 검증</li>
+                                    <li>인증 완료 시 새로운 JWT 토큰 재발급 및 쿠키 설정 응답</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <figure class="lst-con right">
+                            <div class="img-box">
+                                <div class="img-inner">
+                                    <img src="../../assets/image/portfolio/theBook/theBook.jpg" alt="얼굴로그인 이미지">
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
+                    <h4 class="desc-title">기술스택</h4>
+                    <ul class="list skill-list">
+                        <li><strong class="title tultip">Backend</strong> Java, Spring Boot, Spring Security, Python</li>
+                        <li><strong class="title tultip">Database</strong> PostgreSQL, pgvector</li>
+                        <li><strong class="title tultip">AI & Vision</strong> Hugging Face</li>
+                        <li><strong class="title tultip">DevOps</strong> Docker</li>
+                    </ul>
+                </div>
+                
+                <div class="li portfolio-card">
+                    <div class="seperate-con">
+                        <div class="lst-con left">
+                            <h3 class="link-title"><i class="num">02.</i>GIS</h3>
+                            <h4 class="desc-title">프로젝트 설명</h4>
+                            <div class="desc-sc">
+                                <h5 class="title desc-b_title">공간 데이터 활용 시스템</h5>
+                                <p>프로젝트 준비중</p>
+                            </div>
+                            <button @click="toggleExpand('gis')" class="btn basic-btn">
+                                {{ isExpanded['gis'] ? '상세설명 닫기' : '상세설명 보기' }}
+                            </button>
+                             <a class="btn basic-btn" href="https://github.com/TaengAndJong" target="_blank">원격저장소</a>
+                            
+                            <div v-show="isExpanded['gis']" class="desc-sc">
+                                상세보기 준비중
+                            </div>
 
-                                        <ul>
-                                            <li><strong>얼굴 데이터 벡터화:</strong> MediaPipe를 활용해 얼굴 영역을 감지하고 고차원 벡터 임베딩 데이터로 변환 후 DB 저장</li>
-                                            <li><strong>Redis 예외 처리:</strong> 얼굴 일치도 미달 시 이메일 인증번호를 생성하고 Redis 캐시(TTL)를 통해 유효성 검증</li>
-                                            <li><strong>상태 관리:</strong> JWT를 적용하여 Spring Security 환경에서 세션리스 인증 체계 구축</li>
-                                        </ul>
-                                        
-                                        <a class="btn git icon" href="https://github.com/TaengAndJong/faceLogin.git" title="프로젝트 원격저장소 바로가기"  target="_blank">
-                                            <span class="sr-only">프로젝트 원격저장소 바로가기 버튼</span>
-                                        </a>
-                                    </div>
-                                    <!-- 상세설명 --> 
-                                    <h4 class="desc-title">기술스택</h4>
-                                    <ul class="list skill-list">
-                                        <li>
-                                            <strong class="title tultip">Backend</strong>
-                                            Java, Spring Boot, Spring Security, Python
-                                        </li>
-                                        <li>
-                                           <strong class="title tultip">Database & Vector Search</strong>
-                                           PostgreSQL, pgvector
-                                        </li>
-                                        <li>
-                                             <strong class="title tultip">AI & Vision</strong>
-                                             Hugging Face
-                                        </li>
-                                        <li>
-                                           <strong class="title tultip">DevOps</strong>
-                                           Docker
-                                        </li>
-                                    </ul>
+                        </div>
+                        <figure class="lst-con right">
+                            <div class="img-box">
+                                <div class="img-inner">
+                                    <img src="../../assets/image/portfolio/theBook/theBook.jpg" alt="GIS 이미지">
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
+                    <h4 class="desc-title">기술스택</h4>
+                    <ul class="list skill-list">
+                        <li><strong class="title tultip">Backend</strong> Python, FastAPI</li>
+                        <li><strong class="title tultip">Database</strong> PostgreSQL, PostGIS</li>
+                    </ul>
+                </div>
+                
+                <div class="li portfolio-card">
+                    <div class="seperate-con">
+                        <div class="lst-con left">
+                            <h3 class="link-title"><i class="num">03.</i>도서판매(the book)</h3>
+                            <h4 class="desc-title">프로젝트 설명</h4>
+                            <div class="desc-sc">
+                                <h5 class="title desc-b_title">이커머스 서비스</h5>
+                                <p>일반회원과 관리자로 권한을 분리한 도서 판매 웹 서비스 (예외처리, 책임분리 수정 중)</p>
+                            </div>
+                            <button @click="toggleExpand('book')" class="btn basic-btn">
+                                {{ isExpanded['book'] ? '상세설명 닫기' : '상세설명 보기' }}
+                            </button>
+                            <a class="btn basic-btn" href="https://github.com/TaengAndJong/faceLogin.git" target="_blank">원격저장소</a>
+                             <div v-show="isExpanded['book']" class="desc-sc">
+                                상세보기 준비중
+                            </div>
 
+                        </div>
+                        <figure class="lst-con right">
+                            <div class="img-box">
+                                <div class="img-inner">
+                                    <img src="../../assets/image/portfolio/theBook/theBook.jpg" alt="도서판매 이미지">
                                 </div>
                             </div>
-                            <figure class="lst-con right">
-                                <div class="img-box">
-                                    <div class="img-inner">
-                                        <img src="../../assets/image/portfolio/theBook/theBook.jpg" alt="도서판매포트폴리오 이미지">
-                                    </div>
-                                </div>
-                            </figure>
-                        </div>
-                    </li>
-                    <!--End: faceLogin -->
-                    <!-- Start -->
-                    <li class="li">
-                        <div  class="link">
-                            <div class="lst-con left">
-                                    <h3 class="link-title"><i class="num">02.</i> GIS 프로젝트(아키텍트 지망용)</h3>
-                                    <div class="desc">
-                                        <p>GIS 프로젝트(아키텍트 지망용)</p>
-                                        <strong class="desc-title">클라이언트</strong>                                
-                                        <p>회원가입, 마이페이지(찜·개인정보·배송지 관리), 장바구니, 결제, 도서 조회 및 검색 기능을 이용 가능</p>
-                                        <strong class="desc-title">관리자</strong>
-                                        <p>방문자 통계, 페이지 클릭뷰, 도서 등록/수정/삭제, 게시판 문의 관리 기능을 통해 전체 사이트를 운영 가능</p>
-                                    </div>
-                            </div>
-                            <figure class="lst-con right">
-                                <div class="img-box">
-                                    <div class="img-inner">
-                                        <img src="../../assets/image/portfolio/theBook/theBook.jpg" alt="도서판매포트폴리오 이미지">
-                                    </div>
-                                </div>
-                            </figure>
-                        </div>
-                    </li>
-                    <!-- End -->
-                    <!-- thebook -->
-                    <li class="li">
-                        <div  class="link">
-                            <div class="lst-con left">
-                                <h3 class="link-title">
-                                    <i class="num">03.</i>도서판매<small>(PC형)</small>
-                                    <a class="btn git icon" href="https://github.com/TaengAndJong/team01.git" title="프로젝트 원격저장소 바로가기"  target="_blank">
-                                            <span class="sr-only">프로젝트 원격저장소 바로가기 버튼</span>
-                                    </a>
-                                </h3>
-                                <div class="desc">
-                                    <p>일반회원과 관리자로 권한을 분리한 도서 판매 웹 서비스( 예외처리, 책임분리 수정 중 )</p>
-                                    <strong class="desc-title">사용기술</strong>
-                                    <ul class="skill">
-                                        <!-- Programming Languages -->
-                                        <li>
-                                            <i class="skill-icon java"></i>
-                                            <p class="sr-only">java</p>
-                                        </li>
-                                        <li>
-                                            <i class="skill-icon sql"></i>
-                                            <p class="sr-only">oracle sql</p>
-                                        </li>
-                                        <li>
-                                            <i class="skill-icon js"></i>
-                                            <p class="sr-only">javascript</p>
-                                        </li>
-                                        <li>
-                                            <i class="skill-icon css"></i>
-                                            <p class="sr-only">css</p>
-                                        </li>
-                                        <li>
-                                            <i class="skill-icon sass"></i>
-                                            <p class="sr-only">sass</p>
-                                        </li>
-                                        <!-- Frameworks & Back-end -->
-                                        <li>
-                                            <i class="skill-icon react"></i>
-                                            <p class="sr-only">react</p>
-                                        </li>
-                                        <li>
-                                            <i class="skill-icon spring_boot"></i>
-                                            <p class="sr-only">spring boot</p>
-                                        </li>
-                                        <li>
-                                            <i class="skill-icon spring_security"></i>
-                                            <p class="sr-only">spring security</p>
-                                        </li>
-                                        <!--  Libraries -->
-                                        <li>
-                                            <i class="skill-icon swiper"></i>
-                                            <p class="sr-only">swiper</p>
-                                        </li>
-                                        <li>
-                                            <i class="skill-icon gsap"></i>
-                                            <p class="sr-only">gsap</p>
-                                        </li>
-                                        <!--  Design Tools -->
-                                        <li>
-                                            <i class="skill-icon figma"></i>
-                                            <p class="sr-only">figma</p>
-                                        </li>
-                                        <li>
-                                            <i class="skill-icon ps"></i>
-                                            <p class="sr-only">photoshop</p>
-                                        </li>
-                                        <!-- Tools & Editors -->
-                                        <li>
-                                            <i class="skill-icon vscode"></i>
-                                            <p class="sr-only">vscode</p>
-                                        </li>
-                                        <li>
-                                            <i class="skill-icon intelliJ"></i>
-                                            <p class="sr-only">intelliJ</p>
-                                        </li>
-                                        <li>
-                                            <i class="skill-icon vite"></i>
-                                            <p class="sr-only">vite</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figure class="lst-con right">
-                                <div class="img-box">
-                                    <div class="img-inner">
-                                        <img src="../../assets/image/portfolio/theBook/theBook.jpg" alt="도서판매포트폴리오 이미지">
-                                    </div>
-                                </div>
-                            </figure>
-                        </div>
-                    </li>
-                    <!-- End -->
-                    
-                </ul>
-            <!-- 포트폴리오 ul -->
+                        </figure>
+                    </div>
+                    <h4 class="desc-title">기술스택</h4>
+                    <ul class="list skill-list">
+                        <li><strong class="title tultip">Languages</strong> Java, JavaScript, SQL</li>
+                        <li><strong class="title tultip">Front-end</strong> HTML5, CSS3, Sass, React</li>
+                        <li><strong class="title tultip">Back-end</strong> Spring Boot, Spring Security</li>
+                        <li><strong class="title tultip">Animation</strong> Swiper, GSAP</li>
+                    </ul>
+                </div>
+                
             </div>
-        <!--스크롤 wrap-->
         </div>
     </div>
 </section>
-    `
-    
+  `,
 };
-
-
-/*
-Math.min(Math.floor(progress * totalCards), totalCards - 1); 
-Math.min(A,B) : A와 B 중 최소값 선택
-progress : GSAP이 알려주는 현재 스크롤 진행도로 최소 0.0 ~ 최대 1.0
-totalCards : 아이템의 개수 총 개수 
-progress * totalCards : 
-
-0.0 * 3  = 0 =>  Math.floor(0.0) = 0, 소수점 탈락
-0.5 * 3 = 1.5 => Math.floor(1.5) = 1, 소수점 탈락
-0.9 * 3 = 2.7 => Math.floor(2.7) = 2 
-1.0 * 3 = 3.0 => Math.floor(3.0) = 3 
-
- ** totalCards - 1 의 중요성
-전체 아이템의 개수가 3개라면 인덱스의 마지막 값은 2이기 때문에 3이 오면 에러가 생기기 때문에 
-최종 인덱스값과 동일한 값을 맞추기 위해 -1을 해줌 
-Math.min() 함수를 통해 '전체 아이템 갯수 -1'을 최소값으로 반환하여 마지막 인덱스에 맞춤
-
-Math.min(A,B) 
-= Math.min(0,totalCards-1)
-= Math.min(0,2) = 0
-= Math.min(1,2) = 1
-= Math.min(3,2) = 2
-
-*/

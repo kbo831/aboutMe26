@@ -1,45 +1,84 @@
 
-/* list */
+.sc-portfolio,.sc-portfolio .sc-inner{height: auto; overflow: visible !important;}
+
+.btn.basic-btn{font-size: 1.6rem; margin-right: 1rem; min-height: 4rem; font-family: var(--font-pretendard);}
+
+.desc-sc{font-size: 1.8rem;}
+.desc-sc,.desc-sc .title{display: block;}
+.desc-sc,.desc-title,.desc-sc .title, .title{margin: 1.5rem 0;color:var(--font-color02)}
+
+
+.desc-list{}
+.desc-list > li{padding-left:2rem;}
+
+
+.desc-list.flat{padding-left: 1rem}
+
+
+
+
+/* .full-list  */
+[class *="-list"].full-list .li{padding-bottom: 7rem;
+    margin-bottom: 7rem;}
+/* .full-list .skill-list */
+[class *="-list"].skill-list{padding: 2rem; border:1px solid var(--font-color02);border-radius: 1rem; color:var(--font-color02);font-size:1.8rem;}
+
+[class *="-list"].skill-list .tultip{color:var(--font-color02)}
+
 
 
 /* 애니메이션 트리거 */
 .portfolio-trigger-section{
 
-    position: relative;
     width: 100%;
-    min-height: 100vh;
+   height: auto; 
+
 }
 
 /* 애니메이션 콘텐츠 담은 wrap*/
 .portfolio-scroll-wrap{
-    width: 100%;
-    height: 100vh; /* 화면에 꽉 차게 고정될 영역 */     
-    position: relative;
-    overflow: hidden;}
+   width: 100%;
+   height: auto;
+  position: relative;
+   
+  }
 
 .portfolio-scroll-wrap .full-list{
     position: relative;
     width: 100%;
-    height: 100%;
-    padding: 0;
+    height: auto;
     margin: 0;
+    padding: 0;
+  
 }
+
 /*모든 카드를 한자리에 포개어 놓기*/
 .portfolio-scroll-wrap .full-list .li
-{position: absolute; 
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-background-color: var(--main-bg-color);
-}
-/*첫 번째 카드 외에 2, 3번 카드는 처음에 아래쪽에 숨기기*/
-.portfolio-scroll-wrap .full-list .li:not(:first-child) {
-  transform: translateY(100%); 
+{ 
+ background-color: var(--main-bg-color);
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto; 
+    min-height: 100vh;
+    padding: 6rem 2rem;
+    overflow: visible;
+    /* 스크롤바를 부드럽게 만들기 위한 터치 스크롤 설정 */
+    -webkit-overflow-scrolling: touch;
+     background-color: var(--main-bg-color);
 }
 
 .portfolio-scroll-wrap .full-list .link{justify-content: space-between;gap: 2rem;}
 .portfolio-scroll-wrap .full-list .lst-con.right{max-width: 46rem;align-self: flex-start;}
+
+.portfolio-scroll-wrap .detailed-content{
+  /* 토글 시 자연스럽게 보이도록 block 설정 유지 */
+    display: block; 
+    width: 100%;
+    height: auto;
+    /* 내용이 아래 패딩을 침범하지 않도록 마진 확보 */
+    padding-bottom: 4rem;}
 .portfolio-scroll-wrap .desc{margin-top: 4rem;}
 .portfolio-scroll-wrap .desc-title{margin: 1rem 0 0.5rem 0;display: block;}
 
@@ -48,20 +87,23 @@ background-color: var(--main-bg-color);
 .portfolio-scroll-wrap .skill-icon{width: 100%; height: 100%;}
 
 /* title */
-.portfolio-title{
+.portfolio-title,.portfolio-card{
     opacity: 0;
   transform: translateY(30px);
   /* 상태가 변할 때 0.8초 동안 부드럽게 변하도록 설정 */
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;}
 
-.portfolio-title.is-visible {
+.portfolio-title.is-visible,.portfolio-card.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
 /*책갈피 */
-.portfolio-bookmark{position:absolute; top: 50%;
-  right: 4rem; transform: translateY(-50%);padding: 0 5rem;z-index: 88}
+.portfolio-bookmark{position:fixed; top: 50%;
+  right: 4rem; transform: translateY(-50%);padding: 0 5rem;z-index: 88;opacity: 0;visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;}
+.portfolio-bookmark.is-visible{opacity: 1;
+  visibility: visible;}
 .portfolio-bookmark ul,.portfolio-bookmark ul li, .portfolio-bookmark a{width: 100%;}
 .portfolio-bookmark ul{}
 .portfolio-bookmark ul li{}

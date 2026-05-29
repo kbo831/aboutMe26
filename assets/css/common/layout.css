@@ -54,6 +54,7 @@ h2,.h2{
 }
 h3,.h3{font-size: 4rem;}
 h4,.h4{font-size: 3rem;}
+h5,.h5{font-size: 2rem;}
 
 /* object imgbg */
 .object{display:inline-block; position: absolute; background-size: contain; background-position: center; background-repeat: no-repeat;}

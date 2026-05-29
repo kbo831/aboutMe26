@@ -4,17 +4,17 @@
 /* 타임라인 activity */
 .activity{max-width: 80%; width: 100%;}
 .activity h2{margin: 3rem 0;}
-.activity-list{}
-.activity-list .solid-title{margin-bottom:0;}
-.activity-list .link{display: block;}
-.activity-list .desc{position:relative;padding:6rem 2rem 6rem 10rem;}
-.activity-list .desc:before{content: ''; display: block;
+[class *="-list"].activity-list{}
+[class *="-list"].activity-list .solid-title{margin-bottom:0;}
+[class *="-list"].activity-list .link{display: block;}
+[class *="-list"].activity-list .desc{position:relative;padding:6rem 2rem 6rem 10rem;}
+[class *="-list"].activity-list .desc:before{content: ''; display: block;
 width: 1px; background-color: var(--main-bg-color2); position: absolute; left:5rem; top: 0; height: 100%;
 }
-.activity-list li { font-size: 1.8rem;}
-.activity-list li:not(:last-child) {margin-bottom: 3rem;}
-.activity-list .desc-title{display: block;margin-top: 1rem;color: var(--font-color02);}
-.activity-list .desc-title ~ span{}
+[class *="-list"].activity-list li { font-size: 1.8rem;}
+[class *="-list"].activity-list li:not(:last-child) {margin-bottom: 3rem;}
+[class *="-list"].activity-list .desc-title{display: block;margin-top: 1rem;color: var(--font-color02);}
+[class *="-list"].activity-list .desc-title ~ span{}
 
 /* tultip */
 .date{font-size: 1.5rem; font-weight: normal;}
@@ -72,17 +72,17 @@ width: 1px; background-color: var(--main-bg-color2); position: absolute; left:5r
 
 @media screen and (max-width:680px) {
 
- .activity-list .link{padding: 3rem 0 }
- .activity-list li{font-size: 1.8rem;}
- .activity-list .desc{padding: 3rem 2rem 3rem 3rem;}
- .activity-list .desc:before{left: 1.5rem;}
+ [class *="-list"].activity-list .link{padding: 3rem 0 }
+ [class *="-list"].activity-list li{font-size: 1.8rem;}
+ [class *="-list"].activity-list .desc{padding: 3rem 2rem 3rem 3rem;}
+ [class *="-list"].activity-list .desc:before{left: 1.5rem;}
 
 }
 
 
 @media screen and (max-width:500px) {
    
-     .activity-list li{font-size: 1.5rem;}
+     [class *="-list"].activity-list li{font-size: 1.5rem;}
 
 
 }
