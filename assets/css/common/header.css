@@ -111,7 +111,7 @@ cubic-bezier(0.42, 0, 0, 1);}
 
 @media (max-width: 640px) {
     .m_open-btn{display: flex;}
-    .gnb-nav{display: none;}
+    
 }
 
 @media screen and (max-width:450px) {
