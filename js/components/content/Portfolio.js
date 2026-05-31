@@ -145,9 +145,12 @@ export default {
                     <a href="#void" @click.prevent="scrollToCard(1)"><span>02.도서판매</span></a>
                 </li>
                 <li data-slide="2">
-                    <a href="#void" @click.prevent="scrollToCard(2)"><span>03.GIS</span></a>
+                    <a href="#void" @click.prevent="scrollToCard(2)"><span>03.PMS&AI추천</span></a>
                 </li>
-               <!-- <li data-slide="3">
+                <li data-slide="3">
+                    <a href="#void" @click.prevent="scrollToCard(3)"><span>04.GIS</span></a>
+                </li>
+                 <!-- <li data-slide="3">
                     <a href="#void" @click.prevent="scrollToCard(3)"><span>04.추천시스템</span></a>
                 </li> -->
             </ul>
@@ -212,7 +215,7 @@ export default {
                         <figure class="lst-con right">
                             <div class="img-box">
                                 <div class="img-inner">
-                                     <img src="assets/image/common/faceLogin.jpg" alt="얼굴로그인 이미지">
+                                     <img src="assets/image/portfolio/faceLogin/faceLogin.jpg" alt="얼굴로그인 이미지">
                                 </div>
                             </div>
                         </figure>
@@ -323,7 +326,7 @@ export default {
                                 <ul>
                                     <li><span class="tultip">초기</span> Java CLI 호텔예약시스템</li>
                                     <li><span class="tultip">중기</span> Java Web Servlet,MVC 패턴,JSP 학사관리시스템</li>
-                                    <li><span class="tultip">말기</span> Java,Spring Security 적용한 PMS와 AI 추천시스템 </li>
+                                    <li><span class="tultip">말기</span> Java,Spring,Spring Security를 적용한 PMS와 AI를 적용한 추천시스템 </li>
                                 </ul>
                             </div>
                             <button @click="toggleExpand('gis')" class="btn basic-btn">
@@ -333,14 +336,22 @@ export default {
                             
                             <div v-show="isExpanded['gis']" class="desc-sc">
                                  <strong class="title">Project Management System</strong>
-                                <ol class="common-list desc-list basic">
-                                    <li class="none-bulit">
-                                        <strong class="tultip">보안</strong>
-                                        Spring Security 사용자 인증 및 인가 처리
-                                    </li>
+                                <ol class="common-list basic">
                                     <li class="none-bulit">
                                         <strong class="tultip">데이터</strong>
-                                        Oracle DB와 SQL 매퍼 프레임워크 MyBatis 사용하여 자바와 연동
+                                        Oracle DB와 SQL 매퍼 프레임워크 MyBatis를 사용하여 데이터 관리 및 자바 객체 매핑
+                                    </li>
+                                    <li class="none-bulit">
+                                        <strong class="tultip">보안</strong>
+                                        Spring Security 기반 사용자 인증(Authentication) 및 인가(Authorization) 처리
+                                    </li>
+                                    <li class="none-bulit">
+                                        <strong class="tultip">서버</strong>
+                                        Spring Framework 기반 MVC 패턴 적용 및 REST API 제공
+                                    </li>
+                                    <li class="none-bulit">
+                                        <strong class="tultip">프론트</strong>
+                                        JSP를 활용한 화면 구성 및 JavaScript(AJAX)를 이용한 비동기 통신 구현
                                     </li>
                                     <li class="none-bulit">
                                         <a class="btn basic-btn" href="doc/ddit/navi_프로젝트_계획서.pdf" target="_blank">프로젝트 계획서</a>
@@ -350,7 +361,7 @@ export default {
                                 </ol>
 
                                 <strong class="title">AI 추천시스템</strong>
-                                 <ol class="common-list desc-list basic">
+                                 <ol class="common-list basic">
                                     <li class="none-bulit">
                                         <span class="tultip">1차</span>날씨, 연령, 성별에 따른 대전지역 맛집 추천
                                     </li>
@@ -363,7 +374,7 @@ export default {
                                         <a class="btn basic-btn" href="doc/ddit/recom_ai/맛집추천_화면정의서.pdf" target="_blank">화면정의서</a>
                                     </li>
                                 </ol>
-                                 <ol class="common-list desc-list basic">
+                                 <ol class="common-list basic">
                                     <li class="none-bulit">
                                         <span class="tultip">2차</span>음석인식 기능 추가한 날씨, 연령, 성별에 따른 대전지역 맛집 추천
                                     </li>
@@ -377,8 +388,7 @@ export default {
                         <figure class="lst-con right">
                             <div class="img-box">
                                 <div class="img-inner">
-                                        <span class="no-image"></span>
-                                   <!-- <img src="../../assets/image/common/noImage.png" alt="GIS 이미지"> -->
+                                  <img src="assets/image/portfolio/ddit/PMS.jpg" alt="GIS 이미지">
                                 </div>
                             </div>
                         </figure>
