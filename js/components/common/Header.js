@@ -24,7 +24,7 @@ export default {
                 <nav class="gnb-nav" aria-label="주요 메뉴">
                     <ul class="nav-ul">
                         <li class="nav-li contact">
-                            <button href="#void" @click.preventDefault="sendSms" class="nav-link">
+                            <button type="button" href="#void" @click="$emit('open-contact')" class="nav-link">
                                 <span>연락</span>
                             </button>
                         </li>

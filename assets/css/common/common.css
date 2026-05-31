@@ -1,7 +1,16 @@
-@import "../../css/common/icon.css"; @import "../../css/common/skill-icon.css"; @import "../../css/common/button.css"; body {
+@import "../../css/common/icon.css"; 
+@import "../../css/common/skill-icon.css"; 
+@import "../../css/common/button.css"; 
+@import "../../css/common/modal.css";
+
+
+body {
     font-family: "Pretendard","GmarketSans",sans-serif
 }
 
+/* 모달  */
+
+/* 공통 */
 .sr-only {
     position: absolute!important;
     display: inline-block!important;
@@ -209,15 +218,15 @@
 }
 
 .skip-card .icon.icon01 {
-    background-image: url(../../img/main/whoiam_small.png)
+    background-image: url(../../image/main/whoiam_small.png)
 }
 
 .skip-card .icon.icon02 {
-    background-image: url(../../img/main/portfolio_small.png)
+    background-image: url(../../image/main/portfolio_small.png)
 }
 
 .skip-card .icon.icon03 {
-    background-image: url(../../img/main/contact_small.png)
+    background-image: url(../../image/main/contact_small.png)
 }
 
 .skip-card .bg {
@@ -229,15 +238,16 @@
 }
 
 .skip-card .bg.bg01 {
-    background-image: url(../../img/main/whoiam_big.png)
+    background-image: url(../../image/contact/kakao.png)
 }
 
 .skip-card .bg.bg02 {
-    background-image: url(../../img/main/portfolio_big.png)
+     background-image: url(../../image/contact/call.png)
 }
 
 .skip-card .bg.bg03 {
-    background-image: url(../../img/main/contact_big.png)
+    background-image: url(../../image/contact/email.png)
+   
 }
 
 .row-list {

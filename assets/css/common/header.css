@@ -34,9 +34,9 @@
 .gnb{display: inline-flex; align-items: center; }
 .gnb-nav{}
 .nav-ul{display: flex; justify-content: center; 
-    font-size: var(--header-font-size); gap:var( --gnb-gap)}
+    font-size: var(--header-font-size); gap:var( --gnb-gap);}
 .nav-ul .nav-li{}
-.nav-ul .nav-link{}
+.nav-ul .nav-link{font-size: 3rem; border:none}
 .nav-ul .nav-li.skill{display:none}
 
 .nav-link{position: relative; color:var(--main-font-color);font-family:var(--font-gmarket);}

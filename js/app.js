@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import HeaderSection from './components/common/Header.js';
 import ContentSection from './components/common/Content.js';
 import FooterSection from './components/common/Footer.js';
+import ContactModalSection from './components/common/ContactModal.js';
 // 여기에 Header, Projects 등도 똑같이 import
 
 
@@ -12,15 +13,35 @@ const App = {
         'header-section': HeaderSection,
         'content-section': ContentSection,
         'footer-section': FooterSection,
+        'contact-modal-section': ContactModalSection
         //추가할 섹션 작성
+    },
+    data() {
+        return {
+            showContactModal: false
+        };
+    },
+    methods: {
+        openContactModal() {
+            console.log("open");
+            this.showContactModal = true;
+        },
+        closeContactModal() {
+            console.log("close");
+            this.showContactModal = false;
+        }
     },
     template: `
         <div>
             <!-- 헤더, 프로젝트 등 다른 컴포넌트들도 레이아웃에 배치 -->
-            <header-section></header-section>
+            <header-section @open-contact="openContactModal"></header-section>
             <content-section></content-section>
             <footer-section></footer-section>
+            <contact-modal-section 
+            :show="showContactModal"
+    @close="closeContactModal"></contact-modal-section>
         </div>
+        
     `
 };
 
@@ -30,4 +51,6 @@ createApp(App).mount('#app');
 /*
 app.js(모든 컴포넌트 조립)
 분리된 컴포넌트들을 가져와서 최종적으로 #app에 연결하는 메인 컨트롤러 역할
+
+
 */
