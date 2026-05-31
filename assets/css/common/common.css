@@ -11,6 +11,7 @@ body {
 /* 모달  */
 
 /* 공통 */
+.db-none{display: none !important;}
 .sr-only {
     position: absolute!important;
     display: inline-block!important;

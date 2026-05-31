@@ -210,6 +210,13 @@ export default {
                                     <li>BindingResult 및 SmartValidator를 활용한 동적 검증</li>
                                     <li>인증 완료 시 새로운 JWT 토큰 재발급 및 쿠키 설정 응답</li>
                                 </ol>
+                                <!-- 안내 
+                                <h4 class="desc-title">한계점</h4>
+                                    <ol class="desc-list basic">
+                                        <li></li>
+                                        <li></li>
+                                    </ol>
+                                안내 -->
                             </div>
                         </div>
                         <figure class="lst-con right">
@@ -408,7 +415,7 @@ export default {
                 </div>
                 <!-- daeduk -->
                   <!-- GIS -->
-                <div class="li portfolio-card is-visible">
+                <div class="li portfolio-card db-none">
                     <h3 class="link-title"><i class="num">04.</i>GIS</h3>
                     <div class="seperate-con">
                         <div class="lst-con left">
@@ -436,7 +443,7 @@ export default {
                 </div>
                 <!-- GIS -->
                 <!-- LLM  -->
-                <div class="li portfolio-card is-visible">
+                <div class="li portfolio-card db-none">
                     <h3 class="link-title"><i class="num">05.</i>추천 시스템</h3>
                     <div class="seperate-con">
                         <div class="lst-con left">
