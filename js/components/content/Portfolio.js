@@ -324,9 +324,9 @@ export default {
                             <div class="desc-sc">
                                 <h5 class="title desc-b_title">대덕인재개발원 프로젝트</h5>
                                 <ul>
-                                    <li><span class="tultip">초기</span> Java CLI 호텔예약시스템</li>
-                                    <li><span class="tultip">중기</span> Java Web Servlet,MVC 패턴,JSP 학사관리시스템</li>
-                                    <li><span class="tultip">말기</span> Java,Spring,Spring Security를 적용한 PMS와 AI를 적용한 추천시스템 </li>
+                                    <li><span class="tultip">초기</span> Java CLI기반 호텔예약시스템</li>
+                                    <li><span class="tultip">중기</span> Java Web(Servlet, JSP, MVC 패턴) 기반 학사 관리 시스템 </li>
+                                    <li><span class="tultip">말기</span> Spring Framework 기반 PMS(Project Management System) 및 AI 추천 시스템</li>
                                 </ul>
                             </div>
                             <button @click="toggleExpand('gis')" class="btn basic-btn">
@@ -335,10 +335,10 @@ export default {
                              <a class="btn basic-btn" href="https://github.com/TaengAndJong/DDit.git" target="_blank">원격저장소</a>
                             
                             <div v-show="isExpanded['gis']" class="desc-sc">
-                                 <strong class="title">Project Management System</strong>
+                                 <strong class="title">Project Management System(팀)</strong>
                                 <ol class="common-list basic">
                                     <li class="none-bulit">
-                                        <strong class="tultip">데이터</strong>
+                                        <strong class="tultip">사용 기술</strong>
                                         Oracle DB와 SQL 매퍼 프레임워크 MyBatis를 사용하여 데이터 관리 및 자바 객체 매핑
                                     </li>
                                     <li class="none-bulit">
@@ -359,8 +359,15 @@ export default {
                                         <a class="btn basic-btn" href="doc/ddit/navi_PMS_화면정의.pdf" target="_blank">화면정의서</a>
                                     </li>
                                 </ol>
-
-                                <strong class="title">AI 추천시스템</strong>
+                                <strong class="title">PMS(개인)</strong>
+                                 <ol class="common-list basic">
+                                    <li>관리자 페이지를 제외한 전체 UI 레이아웃 및 전체 스타일 구축</li>
+                                    <li>프로그램 디자인(UI) 가이드 제작</li>
+                                    <li>공통 UI 및 스타일 정리</li>
+                                    <li>메인 대시보드 개발 : 프로젝트 현황 수치 출력과 우수 사원 출력 기능 </li>  
+                                   
+                                </ol>
+                                <strong class="title">AI 추천시스템(개인)</strong>
                                  <ol class="common-list basic">
                                     <li class="none-bulit">
                                         <span class="tultip">1차</span>날씨, 연령, 성별에 따른 대전지역 맛집 추천
@@ -376,7 +383,7 @@ export default {
                                 </ol>
                                  <ol class="common-list basic">
                                     <li class="none-bulit">
-                                        <span class="tultip">2차</span>음석인식 기능 추가한 날씨, 연령, 성별에 따른 대전지역 맛집 추천
+                                        <span class="tultip">2차</span> <span class="tultip"> 음석인식 검색기능 </span>추가한 날씨, 연령, 성별에 따른 대전지역 맛집 추천
                                     </li>
                                     <li class="none-bulit">
                                         <a class="btn basic-btn" href="doc/ddit/recom_ai/맛집추천_화면정의서_음성인식기능.pdf" target="_blank">화면정의서</a>
