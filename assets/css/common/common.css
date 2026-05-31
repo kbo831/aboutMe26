@@ -79,7 +79,7 @@
     position: relative;
     display: flex;
     padding: 5rem 0 3rem;
-    border-top: 2px solid var(--main-bg-color2);
+    /* border-top: 2px solid var(--main-bg-color2); */
     gap: 5rem
 }
 

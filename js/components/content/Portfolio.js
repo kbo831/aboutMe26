@@ -157,9 +157,9 @@ export default {
             <div class="ul full-list portfolio-scroll-wrap">
                 
                 <div class="li portfolio-card">
+                    <h3 class="link-title"><i class="num">01.</i>얼굴로그인</h3>
                     <div class="seperate-con">
                         <div class="lst-con left">
-                            <h3 class="link-title"><i class="num">01.</i>얼굴로그인</h3>
                             <h4 class="desc-title">프로젝트 설명</h4>
                             <div class="desc-sc">
                                 <h5 class="title desc-b_title">얼굴 인식(MediaPipe)기반 다중 인증(MFA)을 활용한 보안 로그인 시스템</h5>
@@ -177,7 +177,7 @@ export default {
                                 {{ isExpanded['faceLogin'] ? '상세설명 닫기' : '상세설명 보기' }}
                             </button>
                             <a class="btn basic-btn" href="https://github.com/TaengAndJong/faceLogin.git" target="_blank">원격저장소</a>
-                            <a class="btn basic-btn" href="assets/doc/UISpecification_faceLogin.pdf" target="_blank">화면정의서</a>
+                            <a class="btn basic-btn" href="doc/UISpecification_faceLogin.pdf" target="_blank">화면정의서</a>
                             <div v-show="isExpanded['faceLogin']" class="desc-sc">
                                 <strong class="title">&#9654;&nbsp;회원가입 상세</strong>
                                 <ol class="register-list desc-list basic">
@@ -227,9 +227,10 @@ export default {
                 </div>
 
                 <div class="li portfolio-card">
+                    <h3 class="link-title"><i class="num">02.</i>도서판매(the book)</h3>
                     <div class="seperate-con">
                         <div class="lst-con left">
-                            <h3 class="link-title"><i class="num">02.</i>도서판매(the book)</h3>
+                            
                             <h4 class="desc-title">프로젝트 설명</h4>
                             <div class="desc-sc">
                                <h5 class="title desc-b_title">React(Vite) 및 Spring Boot 기반의 역할별 권한 분리 도서 판매 서비스</h5>
@@ -242,7 +243,7 @@ export default {
                                 {{ isExpanded['book'] ? '상세설명 닫기' : '상세설명 보기' }}
                             </button>
                             <a class="btn basic-btn" href="https://github.com/TaengAndJong/team01.git" target="_blank">원격저장소</a>
-                            <a class="btn basic-btn" href="assets/doc/UISpecification_thebook.pdf" target="_blank">화면정의서</a>
+                            <a class="btn basic-btn" href="doc/UISpecification_thebook.pdf" target="_blank">화면정의서</a>
 
                              <div v-show="isExpanded['book']" class="desc-sc">
                                <strong class="title">&#9654;&nbsp;공통 권한</strong>
@@ -311,23 +312,65 @@ export default {
                         <li><strong class="title tultip">Animation</strong> Swiper, GSAP</li>
                     </ul>
                 </div>
-
+                <!-- daeduk -->
                 <div class="li portfolio-card">
+                    <h3 class="link-title"><i class="num">03.</i>AI기술을 활용한 소프트엔지니어링</h3>
                     <div class="seperate-con">
                         <div class="lst-con left">
-                            <h3 class="link-title"><i class="num">03.</i>GIS</h3>
                             <h4 class="desc-title">프로젝트 설명</h4>
                             <div class="desc-sc">
-                                <h5 class="title desc-b_title">공간 데이터 활용 시스템</h5>
-                                <p>프로젝트 준비중</p>
+                                <h5 class="title desc-b_title">대덕인재개발원 프로젝트</h5>
+                                <ul>
+                                    <li><span class="tultip">초기</span> Java CLI 호텔예약시스템</li>
+                                    <li><span class="tultip">중기</span> Java Web Servlet,MVC 패턴,JSP 학사관리시스템</li>
+                                    <li><span class="tultip">말기</span> Java,Spring Security 적용한 PMS와 AI 추천시스템 </li>
+                                </ul>
                             </div>
                             <button @click="toggleExpand('gis')" class="btn basic-btn">
                                 {{ isExpanded['gis'] ? '상세설명 닫기' : '상세설명 보기' }}
                             </button>
-                             <a class="btn basic-btn" href="https://github.com/TaengAndJong" target="_blank">원격저장소</a>
+                             <a class="btn basic-btn" href="https://github.com/TaengAndJong/DDit.git" target="_blank">원격저장소</a>
                             
                             <div v-show="isExpanded['gis']" class="desc-sc">
-                                상세보기 준비중
+                                 <strong class="title">Project Management System</strong>
+                                <ol class="common-list desc-list basic">
+                                    <li class="none-bulit">
+                                        <strong class="tultip">보안</strong>
+                                        Spring Security 사용자 인증 및 인가 처리
+                                    </li>
+                                    <li class="none-bulit">
+                                        <strong class="tultip">데이터</strong>
+                                        Oracle DB와 SQL 매퍼 프레임워크 MyBatis 사용하여 자바와 연동
+                                    </li>
+                                    <li class="none-bulit">
+                                        <a class="btn basic-btn" href="doc/ddit/navi_프로젝트_계획서.pdf" target="_blank">프로젝트 계획서</a>
+                                        <a class="btn basic-btn" href="doc/ddit/navi_프로세스 흐름도.pdf" target="_blank">프로세스 흐름도</a>
+                                        <a class="btn basic-btn" href="doc/ddit/navi_PMS_화면정의.pdf" target="_blank">화면정의서</a>
+                                    </li>
+                                </ol>
+
+                                <strong class="title">AI 추천시스템</strong>
+                                 <ol class="common-list desc-list basic">
+                                    <li class="none-bulit">
+                                        <span class="tultip">1차</span>날씨, 연령, 성별에 따른 대전지역 맛집 추천
+                                    </li>
+                                    <li class="none-bulit">
+                                        <a class="btn basic-btn" href="doc/ddit/recom_ai/01.데이터 수집 정의서.pdf" target="_blank">데이터수집 정의서</a>
+                                        <a class="btn basic-btn" href="doc/ddit/recom_ai/02.데이터 전처리 정의서의.pdf" target="_blank">데이터 전처리 정의서</a>
+                                        <a class="btn basic-btn" href="doc/ddit/recom_ai/03.신경망 구현 정의서.pdf" target="_blank">신경망 구현 정의서</a>
+                                        <a class="btn basic-btn" href="doc/ddit/recom_ai/04.예측 검증 정의서.pdf" target="_blank">예측 검증 정의서</a>
+                                        <a class="btn basic-btn" href="doc/ddit/recom_ai/DB.7z" target="_blank" download>데이터 SQL쿼리.zip</a>
+                                        <a class="btn basic-btn" href="doc/ddit/recom_ai/맛집추천_화면정의서.pdf" target="_blank">화면정의서</a>
+                                    </li>
+                                </ol>
+                                 <ol class="common-list desc-list basic">
+                                    <li class="none-bulit">
+                                        <span class="tultip">2차</span>음석인식 기능 추가한 날씨, 연령, 성별에 따른 대전지역 맛집 추천
+                                    </li>
+                                    <li class="none-bulit">
+                                        <a class="btn basic-btn" href="doc/ddit/recom_ai/맛집추천_화면정의서_음성인식기능.pdf" target="_blank">화면정의서</a>
+                                    </li>
+                                </ol>
                             </div>
 
                         </div>
@@ -346,9 +389,63 @@ export default {
                         <li><strong class="title tultip">Database</strong> PostgreSQL, PostGIS</li>
                     </ul>
                 </div>
-                
-                
-                
+                <!-- daeduk -->
+                  <!-- GIS -->
+                <div class="li portfolio-card is-visible">
+                    <h3 class="link-title"><i class="num">04.</i>GIS</h3>
+                    <div class="seperate-con">
+                        <div class="lst-con left">
+                            <h4 class="desc-title">프로젝트 설명</h4>
+                            <div class="desc-sc">
+                                <h5 class="title desc-b_title">공간 데이터 활용 시스템</h5>
+                                <p>프로젝트 준비중</p>
+                            </div><button class="btn basic-btn">상세설명 보기</button><a class="btn basic-btn"
+                                href="https://github.com/TaengAndJong" target="_blank">원격저장소</a>
+                            <div class="desc-sc" style="display: none;"> 상세보기 준비중 </div>
+                        </div>
+                        <figure class="lst-con right">
+                            <div class="img-box">
+                                <div class="img-inner"><span
+                                        class="no-image"></span><!-- <img src="../../assets/image/common/noImage.png" alt="GIS 이미지"> -->
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
+                    <h4 class="desc-title">기술스택</h4>
+                    <ul class="list skill-list">
+                        <li><strong class="title tultip">Backend</strong> Python, FastAPI</li>
+                        <li><strong class="title tultip">Database</strong> PostgreSQL, PostGIS</li>
+                    </ul>
+                </div>
+                <!-- GIS -->
+                <!-- LLM  -->
+                <div class="li portfolio-card is-visible">
+                    <h3 class="link-title"><i class="num">05.</i>추천 시스템</h3>
+                    <div class="seperate-con">
+                        <div class="lst-con left">
+                            <h4 class="desc-title">프로젝트 설명</h4>
+                            <div class="desc-sc">
+                                <h5 class="title desc-b_title">음악 추천 시스템</h5>
+                                <p>프로젝트 준비중</p>
+                            </div><button class="btn basic-btn">상세설명 보기</button><a class="btn basic-btn"
+                                href="https://github.com/TaengAndJong" target="_blank">원격저장소</a>
+                            <div class="desc-sc" style="display: none;"> 상세보기 준비중 </div>
+                        </div>
+                        <figure class="lst-con right">
+                            <div class="img-box">
+                                <div class="img-inner"><span
+                                        class="no-image"></span><!-- <img src="../../assets/image/common/noImage.png" alt="추천시스템 이미지"> -->
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
+                    <h4 class="desc-title">기술스택</h4>
+                    <ul class="list skill-list">
+                        <li><strong class="title tultip">Backend</strong> Python, FastAPI</li>
+                        <li><strong class="title tultip">Database</strong> PostgreSQL, PostGIS</li>
+                    </ul>
+                </div>
+                <!-- LLM -->
             </div>
         </div>
     </div>

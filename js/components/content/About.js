@@ -227,7 +227,7 @@ export default {
                                         </li>
                                         <li>
                                             <strong class="desc-title">산동사범대학교</strong>
-                                            한어국제교육학과 석사졸업
+                                            국제한어교육학과 석사졸업
                                         </li>
                                     </ul>
                                 </div>

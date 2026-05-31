@@ -4,6 +4,8 @@ export default {
     name : 'HeaderSection', // 컴포넌트 이름
     setup(){ // js 코드 
         
+        const isOpenBtn = ref(false);
+
         return {};
     },
     //html 마크업
@@ -12,7 +14,7 @@ export default {
         <!-- Header-inner-->
         <div  id="header"  class="header-inner">
             <h1 class="logo">
-                <a href="/aboutMe25" class="link">
+                <a href="/aboutMe26" class="link">
                     <span class="sr-only">taeng's 로고</span>
                 </a>
             </h1>
@@ -22,9 +24,9 @@ export default {
                 <nav class="gnb-nav" aria-label="주요 메뉴">
                     <ul class="nav-ul">
                         <li class="nav-li contact">
-                            <a href="#void" @click.preventDefault="sendSms" class="nav-link">
+                            <button href="#void" @click.preventDefault="sendSms" class="nav-link">
                                 <span>연락</span>
-                            </a>
+                            </button>
                         </li>
                     </ul>
                 </nav>
