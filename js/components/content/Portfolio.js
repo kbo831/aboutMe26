@@ -337,19 +337,19 @@ export default {
                             <div v-show="isExpanded['gis']" class="desc-sc">
                                  <strong class="title">Project Management System(팀)</strong>
                                 <ol class="common-list basic">
-                                    <li class="none-bulit">
-                                        <strong class="tultip">사용 기술</strong>
+                                    <li>
+                                        <strong class="tultip">데이터베이스</strong>
                                         Oracle DB와 SQL 매퍼 프레임워크 MyBatis를 사용하여 데이터 관리 및 자바 객체 매핑
                                     </li>
-                                    <li class="none-bulit">
+                                    <li>
                                         <strong class="tultip">보안</strong>
                                         Spring Security 기반 사용자 인증(Authentication) 및 인가(Authorization) 처리
                                     </li>
-                                    <li class="none-bulit">
+                                    <li>
                                         <strong class="tultip">서버</strong>
                                         Spring Framework 기반 MVC 패턴 적용 및 REST API 제공
                                     </li>
-                                    <li class="none-bulit">
+                                    <li>
                                         <strong class="tultip">프론트</strong>
                                         JSP를 활용한 화면 구성 및 JavaScript(AJAX)를 이용한 비동기 통신 구현
                                     </li>
@@ -369,7 +369,7 @@ export default {
                                 </ol>
                                 <strong class="title">AI 추천시스템(개인)</strong>
                                  <ol class="common-list basic">
-                                    <li class="none-bulit">
+                                    <li>
                                         <span class="tultip">1차</span>날씨, 연령, 성별에 따른 대전지역 맛집 추천
                                     </li>
                                     <li class="none-bulit">
@@ -382,7 +382,7 @@ export default {
                                     </li>
                                 </ol>
                                  <ol class="common-list basic">
-                                    <li class="none-bulit">
+                                    <li>
                                         <span class="tultip">2차</span> <span class="tultip"> 음석인식 검색기능 </span>추가한 날씨, 연령, 성별에 따른 대전지역 맛집 추천
                                     </li>
                                     <li class="none-bulit">
