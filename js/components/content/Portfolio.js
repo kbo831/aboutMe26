@@ -147,9 +147,9 @@ export default {
                 <li data-slide="2">
                     <a href="#void" @click.prevent="scrollToCard(2)"><span>03.PMS&AI추천</span></a>
                 </li>
-                <li data-slide="3">
+                 <!--<li data-slide="3">
                     <a href="#void" @click.prevent="scrollToCard(3)"><span>04.GIS</span></a>
-                </li>
+                </li>-->
                  <!-- <li data-slide="3">
                     <a href="#void" @click.prevent="scrollToCard(3)"><span>04.추천시스템</span></a>
                 </li> -->
@@ -229,7 +229,7 @@ export default {
                     </div>
                     <h4 class="desc-title">기술스택</h4>
                     <ul class="list skill-list">
-                        <li><strong class="title tultip">Backend</strong> Java, Spring Boot, Spring Security, Python</li>
+                        <li><strong class="title tultip">Backend</strong> Java(Spring Boot), Spring Security, Python</li>
                         <li><strong class="title tultip">Database</strong> PostgreSQL, pgvector</li>
                         <li><strong class="title tultip">AI & Vision</strong> Hugging Face</li>
                         <li><strong class="title tultip">DevOps</strong> Docker</li>
@@ -316,9 +316,9 @@ export default {
                     </div>
                     <h4 class="desc-title">기술스택</h4>
                     <ul class="list skill-list">
-                        <li><strong class="title tultip">Languages</strong> Java, JavaScript, SQL</li>
-                        <li><strong class="title tultip">Front-end</strong> HTML5, CSS3, Sass, React</li>
-                        <li><strong class="title tultip">Back-end</strong> Spring Boot, Spring Security</li>
+                        <li><strong class="title tultip">Backend</strong>Java(Spring Boot), Spring Security</li>
+                        <li><strong class="title tultip">Frontend</strong>JavaScript, CSS3, Sass, React</li>
+                         <li><strong class="title tultip">Database&ORM</strong>Oracle,postgresSQL, Mybatis</li>
                         <li><strong class="title tultip">Animation</strong> Swiper, GSAP</li>
                     </ul>
                 </div>
@@ -409,8 +409,11 @@ export default {
                     </div>
                     <h4 class="desc-title">기술스택</h4>
                     <ul class="list skill-list">
-                        <li><strong class="title tultip">Backend</strong> Python, FastAPI</li>
-                        <li><strong class="title tultip">Database</strong> PostgreSQL, PostGIS</li>
+                        <li><strong class="title tultip">Backend</strong>Spring Framework, Spring Security, Java Servlet</li>
+                        <li><strong class="title tultip">Frontend</strong>JavaScript, jQuery, JSP, HTML5, CSS3, (AJAX 비동기 통신)</li>
+                        <li><strong class="title tultip">Database&ORM</strong>Oracle DB, MyBatis</li>
+                        <li><strong class="title tultip">AI&Data</strong>Python, 데이터 전처리 및 인공지능 신경망(Neural Network),음성 인식 API(TTS)</li>
+                        <li><strong class="title tultip">DevOps&Tools</strong>Maven,SVN</li>
                     </ul>
                 </div>
                 <!-- daeduk -->
@@ -437,7 +440,8 @@ export default {
                     </div>
                     <h4 class="desc-title">기술스택</h4>
                     <ul class="list skill-list">
-                        <li><strong class="title tultip">Backend</strong> Python, FastAPI</li>
+                        <li><strong class="title tultip">Backend</strong> Spring Framework, Spring Security, Java Servlet</li>
+                        <li><strong class="title tultip">Frontend</strong> Spring Framework, Spring Security, Java Servlet</li>
                         <li><strong class="title tultip">Database</strong> PostgreSQL, PostGIS</li>
                     </ul>
                 </div>

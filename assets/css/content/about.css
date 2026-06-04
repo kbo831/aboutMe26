@@ -33,7 +33,7 @@
 
 .about-slide.bg02 .slide-inner .lst-con.left{flex:4}
 .about-slide.bg02 .slide-inner .lst-con.right{flex:6}
-.about-slide.bg03 h2{display:inline-flex;align-items:center;justify-content:center;text-align:center;margin:0}
+.about-slide.bg03 h2{display:inline-flex;align-items:center;justify-content:center;text-align:center;margin: 0 0 20rem 0;}
 .about-slide.bg03 h2 .object{position:static;margin:0 2rem}
 .about-slide.bg03 h2 .object.img01{background-image:url(../../image/about/bg0401.png)}
 .about-slide.bg03 h2 .object.img02{background-image:url(../../image/about/bg0402.png)}
@@ -50,6 +50,7 @@
 .about-bookmark > ul{display:flex;align-items:center;justify-content:center;flex-direction:column}
 .about-bookmark li > a{width:2rem;height:2rem;border-radius:50%;background-color:var(--main-bg-color2);margin:.5rem 0;transition:all .2s ease-out;text-align:center;display:inline-block}
 .about-bookmark li > a.active,.about-bookmark li > a:hover,.about-bookmark li > a:focus{width:2.5rem;height:2.5rem}
+
 @media screen and (max-width:1024px) {
 .about-slide{height:auto; min-height: auto;}    
 .about-slide .sc-con{height: auto;}
@@ -76,6 +77,30 @@
 .about-slide.bg05 .column-list{width: 100%; margin-left: 0;}
 
 }
+
+@media screen and (max-width:767px) {
+
+.portfolio-bookmark.is-visible{display: none;}
+.about-slide .row-list{
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    } 
+.about-slide .row-list li{flex-grow: 1;width: auto;aspect-ratio: auto;justify-content: center;align-items: center;width: 100%;border: 4px solid var(--main-bg-color2);padding: 4vw;text-align: center;}
+
+.about-slide.bg03 h2{/* margin-bottom: 0; */margin: 5rem 0;}
+.about-slide.bg03 .object{display: none;}
+.about-slide.bg04 .row-list li{
+    border-radius: unset;
+    aspect-ratio: auto;
+    flex-grow: 1;
+    max-width: none;
+    /* border: 4px solid var(--main-bg-color2); */
+}
+
+}
+
 @media screen and (max-width:680px) {
 
 .about-slide .slide-inner .link{justify-content:center}
