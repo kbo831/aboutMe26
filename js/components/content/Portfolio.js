@@ -364,6 +364,7 @@ export default {
                                         <a class="btn basic-btn" href="doc/ddit/navi_프로젝트_계획서.pdf" target="_blank">프로젝트 계획서</a>
                                         <a class="btn basic-btn" href="doc/ddit/navi_프로세스 흐름도.pdf" target="_blank">프로세스 흐름도</a>
                                         <a class="btn basic-btn" href="doc/ddit/navi_PMS_화면정의.pdf" target="_blank">화면정의서</a>
+                                        <a class="btn basic-btn" href="doc/ddit/programDesignGuid.7z" target="_blank">다지인가이드</a>
                                     </li>
                                 </ol>
                                 <strong class="title">PMS(개인)</strong>
@@ -372,7 +373,6 @@ export default {
                                     <li>프로그램 디자인(UI) 가이드 제작</li>
                                     <li>공통 UI 및 스타일 정리</li>
                                     <li>메인 대시보드 개발 : 프로젝트 현황 수치 출력과 우수 사원 출력 기능 </li>  
-                                   
                                 </ol>
                                 <strong class="title">AI 추천시스템(개인)</strong>
                                  <ol class="common-list basic">
