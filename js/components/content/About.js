@@ -45,8 +45,10 @@ export default {
                     },
                     ease: 'none',
                     scrollTrigger: {
-                        trigger: '#about', // about-trigger-section(최상위 부모)
+                        trigger: '.about-pin-container', // about-trigger-section(최상위 부모)
                         pin: true, //about-pin-container 뷰포트(최상위 부모 하위 자식) 
+                        pinSpacing: true,
+                        anticipatePin: 1,
                         scrub: 1,
                         start: 'top top',
                         end: () => `+=${horizontalWrap.scrollWidth}`,
