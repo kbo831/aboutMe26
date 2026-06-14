@@ -10,7 +10,7 @@ export default {
         'about-section': AboutSection,
         'portfolio-section': PortfolioSection,
         'timeLine-section' : TimeLineSection,
-        'jobFit-section': JobFitSection,
+        
         //추가할 섹션 작성
     },
     setup(){
@@ -19,7 +19,6 @@ export default {
     template:`
     <div class="content">
         <about-section></about-section>
-        <jobFit-section></jobFit-section>
         <timeLine-section></timeLine-section>
         <portfolio-section></portfolio-section>
     </div>
