@@ -148,7 +148,7 @@ export default {
        <!--Trigger: 스크롤 감지 영역 (전체 가로 스크롤을 제어하는 영역) -->
         <div id="about" class="about-trigger-section">
             <!-- 책갈피(Bookmark Nav): 화면 한쪽에 고정될 네비게이션 -->
-            <nav class="about-bookmark">
+         <!--   <nav class="about-bookmark">
                 <ul>
                     <li class="active" data-slide="0">
                     <a href="#void">
@@ -167,7 +167,7 @@ export default {
                         <span class="sr-only">나의 가치관</span></a>
                      </li>
                 </ul>
-            </nav>
+            </nav> -->
           <!-- Pin Container: 화면에 꽉 차게 고정될 뷰포트 구역 -->
             <div class="about-pin-container">
                 <!--  Horizontal Target: 가로로 길게 연결된 실제 내용 -->
@@ -281,66 +281,31 @@ export default {
 
                     <article class="about-slide bg03">
                         <div class="slide-inner sc-con">
-                        
-                            <h2>
-                               <span class="object img01"></span>
-                                나를 설명하는 키워드
-                              <span class="object img02"></span>
-                            </h2>
-                            <ul class="row-list keyword">
-                                <li>
-                                    <span class="object img01"></span>
-                                    <h3>'왜'라는 질문을 하는 </h3>
-                                    <p>
-                                        단순히 기능을 구현하는 것보다 왜 그렇게 동작하는지, 어떤 흐름으로 연결되는지를 이해하는 과정을 중요하게 생각합니다.
-                                    </p>
-                                </li>
-                                <li>
-                                    <span class="object img02"></span>
-                                    <h3>깊게 몰입하는 </h3>
-                                    <p>
-                                        하나의 문제를 오래 붙잡고 원인을 분석하며 스스로 납득할 때까지 고민하는 성향입니다.
-                                    </p>
-                                </li>
-                                <li>
-                                    <span class="object img03"></span>
-                                    <h3>끊임없이 성장하려는 </h3>
-                                    <p>
-                                       하루를 돌아보며 부족했던 점과 개선할 부분을 스스로 점검하는 시간을 중요하게 생각합니다.
-                                    </p>
-                                </li>
-                            </ul>
-                        </div>
-                    </article>
-
-                    <article class="about-slide bg04">
-                        <div class="slide-inner sc-con">
                             <h2>
                              <span class="object img01"></span>
                                 나의 강점
                               <span class="object img02"></span>
                             </h2>
-            
                             <ul class="row-list strength">
                                 <li>
-                                    <h3>프로젝트 전체를 바라보는 시각</h3>
+                                    <h3>프로젝트 전체를 <br>바라보는 시각</h3>
                                     <p>
                                     맡은 기능만 구현하는 것보다 프로젝트 전체 구조와 흐름을 함께 이해하려고 노력합니다. 팀 프로젝트에서는 프로젝트 통합과 공통 가이드 정리를 담당하며 전체 일관성을 높이기 위해 노력했습니다.
                                     </p>
                                 </li>
                                 <li>
-                                    <h3>구조를 먼저 고민하는 개발 습관</h3>
+                                    <h3>구조를 먼저 고민하는 <br>개발 습관</h3>
                                      <p>개인 프로젝트에서 반복 수정 경험을 통해 공통 API 응답 구조, 예외 처리, 계층 분리의 중요성을 깨달았고 이후에는 구조를 먼저 설계하는 습관을 갖게 되었습니다.
                                     </p>
                                 </li>
                                 <li>
-                                    <h3>사용자 관점에서 생각하는 개발</h3>
+                                    <h3>사용자 관점에서 <br>생각하는 개발</h3>
                                     <p>
                                         UI 퍼블리셔 경험을 바탕으로 단순히 기능이 동작하는 것보다 사용자가 자연스럽게 사용할 수 있는 화면과 흐름을 함께 고민합니다.
                                     </p>
                                 </li>
                                  <li>
-                                    <h3>끝까지 원인을 찾는 문제 해결 태도</h3>
+                                    <h3>끝까지 원인을 찾는 <br>문제 해결 태도</h3>
                                     <p>
                                         오류가 발생하면 단순히 해결 방법을 적용하는 것이 아니라 원인을 분석하고 같은 문제가 반복되지 않도록 구조적인 해결 방법을 고민합니다.
                                     </p>
@@ -348,6 +313,8 @@ export default {
                             </ul>
                         </div>
                     </article>
+
+                   
 
                     <article class="about-slide bg05">
                         <div class="slide-inner sc-con">
