@@ -261,7 +261,7 @@ body {
 .row-list li {
     position: relative;
     width: calc(100% / 3);
-    aspect-ratio: 1 / 1
+    aspect-ratio: 2 / 1;
 }
 
 .row-list h3 {
